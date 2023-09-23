@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Reader.Discover"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/separation"
+                    android:layout_gravity="center_horizontal"/>
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="12dp"
+                android:text="You might like"
+                android:textSize="24dp" />
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/row"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="6dp">
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/row"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:backgroundTint="#B7CFB8"
+                        android:text="Travel"
+                        android:textColor="#318134"
+                        app:cornerRadius="24dp" />
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/row"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:backgroundTint="#C6B7CF"
+                        android:text="Poetry"
+                        android:textColor="#723181"
+                        app:cornerRadius="24dp" />
+
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/row"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:backgroundTint="#CFC9B7"
+                        android:text="Photography"
+                        android:textColor="#816D31"
+                        app:cornerRadius="24dp" />
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/row"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:backgroundTint="#CFBDB7"
+                        android:text="Inspiration"
+                        android:textColor="#815431"
+                        app:cornerRadius="24dp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/separation"
+                    android:layout_gravity="center_horizontal"/>
+            <fragment
+                android:id="@+id/discover_example1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="vn.edu.usth.wordpress25.Discover_example"></fragment>
+            <fragment
+                android:id="@+id/disco_follow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/separation"
+                android:layout_gravity="center_horizontal"/>
+
+                <fragment
+                    android:id="@+id/discover_example2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:name="vn.edu.usth.wordpress25.Discover_example"></fragment>
+                <fragment
+                    android:id="@+id/disco_follow2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/separation"
+                    android:layout_gravity="center_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"></LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -21,7 +21,7 @@ public class ReaderPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new following();
             case 1:
-                return new Following_example();
+                return new Discover();
             case 2:
                 return new NotifCommentsFragment();
             case 3:
