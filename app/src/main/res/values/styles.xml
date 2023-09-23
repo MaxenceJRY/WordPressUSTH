@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyStyle" parent="Theme.WordPress25">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="android:textSize">10dp</item> <!-- Définissez ici la taille de texte souhaitée -->
+        <!-- Autres attributs personnalisés pour les onglets -->
+    </style>
+</resources>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="vn.edu.usth.wordpress25.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_reader"
+        android:name="vn.edu.usth.wordpress25.ui.Reader.ReaderFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_reader" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="vn.edu.usth.wordpress25.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_navigation_notifications_to_notifSettings"
+            app:destination="@id/notifSettings" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_me"
+        android:name="vn.edu.usth.wordpress25.ui.me.MeFragment"
+        android:label="@string/title_me"
+        tools:layout="@layout/fragment_me" >
+        <action
+            android:id="@+id/action_navigation_me_to_myprofil2"
+            app:destination="@id/myprofile" />
+        <action
+            android:id="@+id/action_navigation_me_to_accountsettings"
+            app:destination="@id/accountsettings" />
+        <action
+            android:id="@+id/action_navigation_me_to_app_Settings"
+            app:destination="@id/app_Settings" />
+        <action
+            android:id="@+id/action_navigation_me_to_help"
+            app:destination="@id/help" />
+    </fragment>
+    <fragment
+        android:id="@+id/myprofile"
+        android:name="vn.edu.usth.wordpress25.ui.me.myprofile"
+        android:label="My profile"
+        tools:layout="@layout/fragment_myprofile" >
+        <action
+            android:id="@+id/action_myprofile_to_first_Name"
+            app:destination="@id/first_Name" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountsettings"
+        android:name="vn.edu.usth.wordpress25.ui.me.Account_settings"
+        android:label="Account settings"
+        tools:layout="@layout/fragment_account_settings" />
+    <fragment
+        android:id="@+id/app_Settings"
+        android:name="vn.edu.usth.wordpress25.ui.me.App_Settings"
+        android:label="App Settings"
+        tools:layout="@layout/fragment_app_settings" />
+    <fragment
+        android:id="@+id/help"
+        android:name="vn.edu.usth.wordpress25.ui.me.Help"
+        android:label="Aide"
+        tools:layout="@layout/fragment_help" />
+    <dialog
+        android:id="@+id/first_Name"
+        android:name="vn.edu.usth.wordpress25.ui.me.First_Name"
+        android:label="fragment_first_name"
+        tools:layout="@layout/fragment_first_name" />
+    <fragment
+        android:id="@+id/notifSettings"
+        android:name="vn.edu.usth.wordpress25.ui.notifications.NotifSettings"
+        android:label="fragment_notif_settings"
+        tools:layout="@layout/fragment_notif_settings" >
+        <action
+            android:id="@+id/action_notifSettings_to_commentsononthersites"
+            app:destination="@id/commentsononthersites" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentsononthersites"
+        android:name="vn.edu.usth.wordpress25.ui.notifications.Commentsononthersites"
+        android:label="fragment_commentsononthersites"
+        tools:layout="@layout/fragment_commentsononthersites" />
+    <fragment
+        android:id="@+id/notifAllFragment"
+        android:name="vn.edu.usth.wordpress25.ui.notifications.NotifAllFragment"
+        android:label="fragment_notif_all"
+        tools:layout="@layout/fragment_notif_all" >
+        <action
+            android:id="@+id/action_notifAllFragment_to_mail15"
+            app:destination="@id/mail15" />
+    </fragment>
+    <fragment
+        android:id="@+id/mail15"
+        android:name="vn.edu.usth.wordpress25.ui.notifications.Mail1"
+        android:label="fragment_mail1"
+        tools:layout="@layout/fragment_mail1" />
+</navigation>

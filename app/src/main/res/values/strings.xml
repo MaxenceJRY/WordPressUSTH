@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">WordPress25</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Reader</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_me">About me</string>
+    <string name="title_activity_account_settings">Account Settings</string>
+    <!-- Dimensions -->
+    <dimen name="row">48dp</dimen>
+    <string name="title_activity_my_profil">MyProfile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- About Me -->
+
+    <string name="about_me">About me</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="my_p">My profile</string>
+    <string name="acc_set">Account Settings</string>
+    <string name="scan">Scan login Code</string>
+    <string name="app_set">App Settings</string>
+    <string name="help">Help</string>
+    <string name="share">Share Wordpress with a friend</string>
+    <string name="about_w">About Wordpress</string>
+    <string name="log_out">Log out of Wordpress</string>
+
+    <!-- My Profile -->
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="x_first_name">MyFirstName</string>
+    <string name="x_last_name">MyLastName</string>
+    <string name="public_d_n">Public display name</string>
+    <string name="x_public_d_n">MyPublicDisplayName</string>
+
+    <!-- Account Settings -->
+
+    <string name="username">Username</string>
+    <string name="x_username">MyUsername</string>
+    <string name="email">Email Address</string>
+    <string name="x_email">my.email@gmail.com</string>
+    <string name="primary">Primary site</string>
+    <string name="web_add">Web address</string>
+    <string name="x_web_add">http://yourwebsite.wordpress.com</string>
+    <string name="change_pass">Change password</string>
+    <string name="close_acc">Close Account</string>
+
+    <!-- App Settings -->
+
+    <string name="inter_lang">Interface Languages</string>
+    <string name="x_languages">English (United States)</string>
+    <string name="appearance">Appearance</string>
+    <string name="x_appear">Light</string>
+    <string name="privacy_sett">Privacy settings</string>
+    <string name="open_dev_sett">Open device settings</string>
+    <string name="init_screen">Initial Screen</string>
+    <string name="x_init_screen">Home</string>
+    <string name="media">Media</string>
+    <string name="opti_images">Optimize Images</string>
+    <string name="enable_opti_i">Enable to resize and compress pictures</string>
+    <string name="max_image_size">Maximum Image Size</string>
+    <string name="x_max_i_size">3000 px</string>
+    <string name="image_q">Image Quality</string>
+    <string name="x_image_q">Medium</string>
+    <string name="remove_loc">Remove location from media</string>
+    <string name="opti_videos">Optimize Videos</string>
+    <string name="enable_opti_v">Enable to resize and compress videos</string>
+    <string name="max_videos_size">Maximum Video Size</string>
+    <string name="x_max_v_size">720p</string>
+    <string name="video_q">Video Quality</string>
+    <string name="x_video_q">High</string>
+
+    <!-- Help -->
+
+    <string name="contact_supp">Contact Support</string>
+    <string name="browse_faq">Browse our FAQ</string>
+    <string name="tickets">Tickets</string>
+    <string name="contact_email">Contact email</string>
+    <string name="x_contact_email">Not set</string>
+    <string name="logs">Logs</string>
+    <string name="version">Version 23.1.0</string>
+
+    <!-- Dialog Log Out -->
+    <string name="log_out_word">Log out of Wordpress ?</string>
+
+</resources>

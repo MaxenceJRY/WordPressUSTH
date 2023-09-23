@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Reader.following"
+    android:orientation="vertical"
+    android:id="@+id/combo">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/separation"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row"
+        android:orientation="horizontal"
+        android:paddingLeft="24dp">
+
+        <ImageView
+            android:layout_width="@dimen/row"
+            android:layout_height="@dimen/row"
+            android:src="@drawable/filter"
+            android:layout_marginRight="24dp"></ImageView>
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Filter"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/separation"
+        android:layout_gravity="center_horizontal"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/fragment1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/separation"
+        android:layout_gravity="center_horizontal"/>
+    <fragment
+        android:id="@+id/fragment2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/separation"
+        android:layout_gravity="center_horizontal"/>
+    <fragment
+        android:id="@+id/fragment3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"></LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

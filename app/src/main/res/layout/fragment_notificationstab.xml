@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.notifications.notificationstab">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="Notifications tab"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="12dp"/>
+
+
+        <Switch
+            android:id="@+id/switch3"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Replies to my comments"
+            android:textSize="20dp"
+            android:layout_marginLeft="12dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#6E6E6E">
+
+        </RelativeLayout>
+        <Switch
+            android:id="@+id/switch4"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Likes on my comments "
+            android:textSize="20dp"
+            android:layout_marginLeft="12dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#6E6E6E">
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>
