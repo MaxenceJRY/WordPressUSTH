@@ -102,7 +102,7 @@
                 android:id="@+id/discover_example1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:name="vn.edu.usth.wordpress25.Discover_example"></fragment>
+                android:name="vn.edu.usth.wordpress25.ui.Reader.Discover_example"></fragment>
             <fragment
                 android:id="@+id/disco_follow"
                 android:layout_width="wrap_content"
@@ -119,7 +119,7 @@
                     android:id="@+id/discover_example2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:name="vn.edu.usth.wordpress25.Discover_example"></fragment>
+                    android:name="vn.edu.usth.wordpress25.ui.Reader.Discover_example"></fragment>
                 <fragment
                     android:id="@+id/disco_follow2"
                     android:layout_width="wrap_content"

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Reader.Saved">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="200dp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="12dp"
+        android:src="@drawable/nothing" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView3"
+        android:gravity="center_horizontal"
+        android:text="No posts saved - yet!"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/button_reader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line_save"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/teal_200"
+        android:text="Go to following"
+        android:textSize="12dp" />
+
+    <LinearLayout
+        android:id="@+id/line_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row"
+        android:layout_below="@id/textView25"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:src="@drawable/save_white" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to save a post to yout list."
+            android:textSize="18dp" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -51,7 +51,7 @@
         android:orientation="vertical">
 
     <fragment
-        android:id="@+id/fragment1"
+        android:id="@+id/fragment11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>
@@ -61,7 +61,7 @@
         android:background="@color/separation"
         android:layout_gravity="center_horizontal"/>
     <fragment
-        android:id="@+id/fragment2"
+        android:id="@+id/fragment22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>
@@ -71,7 +71,7 @@
         android:background="@color/separation"
         android:layout_gravity="center_horizontal"/>
     <fragment
-        android:id="@+id/fragment3"
+        android:id="@+id/fragment32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>

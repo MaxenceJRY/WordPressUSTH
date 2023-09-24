@@ -23,9 +23,9 @@ public class ReaderPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return new Discover();
             case 2:
-                return new NotifCommentsFragment();
+                return new Likes();
             case 3:
-                return new NotifFollowsFragment();
+                return new Saved();
             default:
                 return null;
         }
