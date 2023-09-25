@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".Firstpage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="24dp">
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/logojetpack" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#80FFFFFF"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="25dp"
+        android:paddingBottom="50dp"
+        tools:layout_gravity="end">
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Continue with Wordpress.com" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:elevation="0dp"
+            android:text="Enter yout existing site"
+            android:textColor="@color/black" />
+    </LinearLayout>
+</RelativeLayout>
