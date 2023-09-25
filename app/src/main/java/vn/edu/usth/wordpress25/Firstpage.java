@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,13 @@ public class Firstpage extends AppCompatActivity {
     }
 
     public void goToMainActivity(View view) {
-        Intent intent = new Intent(Firstpage.this, MainActivity.class);
-        startActivity(intent);
+        Fragment connectionFragment = new connection();
+
+        // Ajoutez le fragment à la pile d'activité
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.firstpage, connectionFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }
