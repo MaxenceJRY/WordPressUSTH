@@ -1,5 +1,6 @@
 package vn.edu.usth.wordpress25.ui.me;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -11,61 +12,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.content.SharedPreferences;
+import android.widget.TextView;
 
 import vn.edu.usth.wordpress25.R;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link myprofile#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class myprofile extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public myprofile() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment myprofil.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static myprofile newInstance(String param1, String param2) {
-        myprofile fragment = new myprofile();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    // ... (autres parties de votre code)
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
+        setHasOptionsMenu(true);
         LinearLayout first_name_layout = view.findViewById(R.id.myfirstname);
         LinearLayout last_name_layout = view.findViewById(R.id.mylastname);
         LinearLayout public_d_layout = view.findViewById(R.id.Public_dis);
@@ -94,6 +53,18 @@ public class myprofile extends Fragment {
                 showDialogAboutMe();
             }
         });
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String loggedInFirstname = sharedPreferences.getString("loggedInFirstname", "");
+        String loggedInLastname = sharedPreferences.getString("loggedInLastname", "");
+        String loggedInDisplayname = sharedPreferences.getString("loggedInDisplayname", "");
+        TextView textView = view.findViewById(R.id.textView);
+        TextView textView4 = view.findViewById(R.id.textView4);
+        TextView textView6 = view.findViewById(R.id.textView6);
+        textView6.setText(loggedInDisplayname);
+        textView4.setText(loggedInLastname);
+        textView.setText(loggedInFirstname);
+
         return view;
     }
 
@@ -122,4 +93,9 @@ public class myprofile extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void onFirstNameChanged(String newFirstName) {
+        TextView textView = getView().findViewById(R.id.textView); // Assurez-vous que c'est le bon ID
+        textView.setText(newFirstName);
+    }
+
 }
