@@ -1,11 +1,14 @@
 package vn.edu.usth.wordpress25.ui.me;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -70,6 +73,14 @@ public class MeFragment extends Fragment {
                 showDialog();
             }
         });
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String loggedInFirstname = sharedPreferences.getString("loggedInFirstname", "");
+        String loggedInDisplayname = sharedPreferences.getString("loggedInDisplayname", "");
+        TextView name = view.findViewById(R.id.Name);
+        TextView surname = view.findViewById(R.id.Surname);
+        surname.setText(loggedInDisplayname);
+        name.setText(loggedInFirstname);
         return view;
     }
 
