@@ -53,9 +53,6 @@ public class NotificationsFragment extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
         return root;
-
-
-
     }
 
     @Override

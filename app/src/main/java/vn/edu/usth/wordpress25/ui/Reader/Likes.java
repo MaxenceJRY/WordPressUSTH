@@ -66,9 +66,10 @@ public class Likes extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_likes, container, false);
-        View view_follow = inflater.inflate(R.layout.fragment_reader, container, false);
+
+        ViewPager viewPager = getActivity().findViewById(R.id.ReaderviewPager);
+
         Button button = view.findViewById(R.id.button_reader);
-        ViewPager viewPager = view_follow.findViewById(R.id.ReaderviewPager);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
