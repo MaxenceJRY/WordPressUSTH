@@ -1,0 +1,18 @@
+[
+  {
+    "email": "admin",
+    "password": "admin",
+    "firstname": "Maxence",
+    "lastname": "Juery",
+    "displayname": "Maxence Juery",
+    "username": "deathload"
+  },
+  {
+    "email": "student",
+    "password": "student",
+    "firstname": "Vladimir",
+    "lastname": "Michot",
+    "displayname": "Vladimir Michot",
+    "username": "LeVlad"
+  }
+]

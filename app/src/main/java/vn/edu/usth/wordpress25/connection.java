@@ -2,6 +2,7 @@ package vn.edu.usth.wordpress25;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import vn.edu.usth.wordpress25.ui.MainActivity;
 
@@ -74,17 +83,47 @@ public class connection extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Log.d("connection", "emailEditText = " + emailEditText);
-
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
+                // Lire le contenu du fichier JSON et vérifier les identifiants
+                try {
+                    String jsonContent = readJsonFile("Account.json");
+                    JSONArray jsonArray = new JSONArray(jsonContent);
 
-                if (email.equals("admin") && password.equals("admin")) {
-                    goToMainActivity(view);
-                } else {
-                    Toast.makeText(getContext(), "Email or password incorrect", Toast.LENGTH_SHORT).show();
+                    boolean isAuthenticated = false;
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String jsonEmail = jsonObject.getString("email");
+                        String jsonPassword = jsonObject.getString("password");
+
+                        if (email.equals(jsonEmail) && password.equals(jsonPassword)) {
+                            isAuthenticated = true;
+
+                            // Stocker toutes les valeurs de l'utilisateur dans les préférences partagées
+                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("loggedInEmail", email);
+                            editor.putString("loggedInPassword", password);
+                            editor.putString("loggedInFirstname", jsonObject.getString("firstname"));
+                            editor.putString("loggedInLastname", jsonObject.getString("lastname"));
+                            editor.putString("loggedInDisplayname", jsonObject.getString("displayname"));
+                            editor.putString("loggedInUsername", jsonObject.getString("username"));
+                            editor.apply();
+
+                            break;
+                        }
+                    }
+
+                    if (isAuthenticated) {
+                        goToMainActivity(view);
+                    } else {
+                        Toast.makeText(getContext(), "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -96,5 +135,22 @@ public class connection extends Fragment {
         Context context = getActivity();
         Intent intent = new Intent(context, MainActivity.class);
         startActivity(intent);
+    }
+
+    // Méthode pour lire le contenu d'un fichier JSON
+    private String readJsonFile(String filePath) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getContext().getAssets().open(filePath)));
+            StringBuilder jsonString = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
+            reader.close();
+            return jsonString.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
