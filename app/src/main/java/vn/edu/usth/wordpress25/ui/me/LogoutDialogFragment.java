@@ -2,11 +2,13 @@ package vn.edu.usth.wordpress25.ui.me;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import vn.edu.usth.wordpress25.Firstpage;
 import vn.edu.usth.wordpress25.R;
 
 public class LogoutDialogFragment extends DialogFragment {
@@ -19,8 +21,10 @@ public class LogoutDialogFragment extends DialogFragment {
                 .setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Gérez la déconnexion ici
-                        // ...
+                        dialog.dismiss();
+
+                        Intent intent = new Intent(getActivity(), Firstpage.class);
+                        getActivity().startActivity(intent);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

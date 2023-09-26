@@ -32,8 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"
             android:ems="10"
-            android:inputType="text"
-            android:text="@string/x_public_d_n" />
+            android:inputType="text" />
 
     </LinearLayout>
 
