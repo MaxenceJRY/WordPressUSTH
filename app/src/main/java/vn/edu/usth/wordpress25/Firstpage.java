@@ -28,6 +28,7 @@ public class Firstpage extends AppCompatActivity {
                 goToMainActivity(view);
             }
         });
+
     }
 
     public void goToMainActivity(View view) {
