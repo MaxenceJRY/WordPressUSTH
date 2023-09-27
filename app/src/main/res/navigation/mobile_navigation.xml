@@ -12,6 +12,18 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/searchFragment"
+        android:name="vn.edu.usth.wordpress25.ui.Reader.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/manageFragment"
+        android:name="vn.edu.usth.wordpress25.ui.Reader.ManageFragment"
+        android:label="Manage"
+        tools:layout="@layout/fragment_manage" />
+
+    <fragment
         android:id="@+id/navigation_reader"
         android:name="vn.edu.usth.wordpress25.ui.Reader.ReaderFragment"
         android:label="@string/title_dashboard"
