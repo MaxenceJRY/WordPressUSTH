@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
+        android:name="App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,6 +24,20 @@
             android:parentActivityName=".ui.me.MeFragment"
             android:label="@string/title_activity_my_profil"
             android:theme="@style/Theme.WordPress25" />
+
+        <activity
+            android:name=".ui.mysite.ChooseThemeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.WordPress25" />
+
+        <activity
+            android:name=".ui.mysite.PreviewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.WordPress25" />
+        <activity
+            android:name=".ui.mysite.AddSiteActivity"
+            android:exported="false" />
+
         <activity
             android:name=".ui.me.Account_settings"
             android:exported="false"

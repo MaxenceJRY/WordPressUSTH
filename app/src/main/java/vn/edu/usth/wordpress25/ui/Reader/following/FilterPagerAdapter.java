@@ -1,13 +1,15 @@
-package vn.edu.usth.wordpress25.ui.Reader;
+package vn.edu.usth.wordpress25.ui.Reader.following;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import vn.edu.usth.wordpress25.ui.Reader.Discover;
+import vn.edu.usth.wordpress25.ui.Reader.FollowingFragment;
 
-public class ReaderPagerAdapter extends FragmentPagerAdapter {
+public class FilterPagerAdapter extends FragmentPagerAdapter {
 
-    public ReaderPagerAdapter(FragmentManager fm) {
+    public FilterPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -19,33 +21,25 @@ public class ReaderPagerAdapter extends FragmentPagerAdapter {
                 return new FollowingFragment();
             case 1:
                 return new Discover();
-            case 2:
-                return new Likes();
-            case 3:
-                return new Saved();
             default:
-                return null;
+                return new Fragment();
         }
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 2;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "FOLLOWING";
+                return "SITES (0)";
             case 1:
-                return "DISCOVER";
-            case 2:
-                return "LIKES";
-            case 3:
-                return "SAVED";
+                return "TOPICS (4)";
             default:
-                return null;
+                return "";
         }
     }
 }
