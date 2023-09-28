@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -137,11 +139,30 @@ public class NotifFollowsFragment extends Fragment {
             // Créez un nouveau fragment pour chaque utilisateur
             UsersFragment userFragment = UsersFragment.newInstance(user.getName()); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
 
+           // Follows_ExempleFragment fFragment2 = Follows_ExempleFragment.newInstance(user.getName());
             // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
             FragmentManager fragmentManager = getChildFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.conteneurusers, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
             fragmentTransaction.commit();
+
+
+
+
+    /*        LinearLayout followclic = getActivity().findViewById(R.id.followclic);
+
+            followclic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(v).navigate(R.id.follows_ExempleFragment);
+                }
+            });*/
+
+
+
+
+
+
         }
 
         return view;
