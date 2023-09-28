@@ -3,6 +3,7 @@ package vn.edu.usth.wordpress25;
 
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
+
 import vn.edu.usth.wordpress25.eventbus.PreferenceUtils;
 
 public class App extends MultiDexApplication {

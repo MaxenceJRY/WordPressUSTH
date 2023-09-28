@@ -12,18 +12,17 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logojetpack"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logojetpack"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WordPress25"
+        android:theme="@style/MyStyle"
         tools:targetApi="31" >
         <activity
             android:name=".ui.me.myprofile"
             android:exported="false"
             android:parentActivityName=".ui.me.MeFragment"
-            android:label="@string/title_activity_my_profil"
-            android:theme="@style/Theme.WordPress25" />
+            android:label="@string/title_activity_my_profil"/>
 
         <activity
             android:name=".ui.mysite.ChooseThemeActivity"
@@ -37,13 +36,14 @@
         <activity
             android:name=".ui.mysite.AddSiteActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".Registration"
+            android:exported="false" />
         <activity
             android:name=".ui.me.Account_settings"
             android:exported="false"
             android:parentActivityName=".ui.me.MeFragment"
-            android:label="@string/title_activity_account_settings"
-            android:theme="@style/Theme.WordPress25" />
+            android:label="@string/title_activity_account_settings"/>
         <activity
             android:name=".Firstpage"
             android:exported="true"
