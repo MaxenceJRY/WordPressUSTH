@@ -1,5 +1,7 @@
 package vn.edu.usth.wordpress25.ui.notifications;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 
 import vn.edu.usth.wordpress25.R;
+import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 import vn.edu.usth.wordpress25.ui.Site;
 import vn.edu.usth.wordpress25.ui.users;
 
@@ -41,7 +44,7 @@ public class NotifFollowsFragment extends Fragment {
 
     //private Site site1Reference;
 
-
+    private DatabaseHelper dbHelper;
 
     //data
     ArrayList<Site> Tabsites = new ArrayList<>();
@@ -84,6 +87,11 @@ public class NotifFollowsFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            // Créer une instance de la classe DatabaseHelper
+            dbHelper = new DatabaseHelper(getContext());
+
+            // Créer la table site_table si elle n'existe pas encore
+            dbHelper.onCreate(dbHelper.getWritableDatabase());
         }
     }
 
@@ -92,28 +100,27 @@ public class NotifFollowsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notif_follows, container, false);
 
+        if (dbHelper == null) {
+            dbHelper = new DatabaseHelper(getContext());
+        }
 
 
-        users User1 = new users("vlad@gmail.com","12345","Leo",Tabuser1folow);
-        users User2 = new users("vlad@gmail.com","12345","Vlad",Tabuser2folow);
-        Site Site1 = new Site("YT",Tabsite1folow);
-        Site Site2 = new Site("FC",Tabsite2folow);
-//adding users
-        Tabusers.add(User1);
-        Tabusers.add(User2);
-//adding sites
-        Tabsites.add(Site1);
-        Tabsites.add(Site2);
-//adding followers to site
-        Site1.getFollowersList().add(User1);
-        Site1.getFollowersList().add(User2);
-        Site2.getFollowersList().add(User1);
-        Site2.getFollowersList().add(User2);
-//adding follows for users
-        User1.getFollowsList().add(Site1);
-        User1.getFollowsList().add(Site2);
-        User2.getFollowsList().add(Site1);
-        User2.getFollowsList().add(Site2);
+
+
+
+
+      //  dbHelper.insertDataSITE("https://www.youtube.com/","Youtube","vlad@gmail.com");
+       // dbHelper.insertDataSITE("https://www.pizza4P.com/","Pizza4P","max@gmail.com");
+        //dbHelper.insertDataSITE("https://www.facebook.com/","Facebook","huy@gmail.com");
+
+     //   dbHelper.insertData("vlad@gmail.com","123","vladimir","michot","vlad78","vlad78");
+       // dbHelper.insertData("max@gmail.com","123","maxence","juery","juery78","juery78");
+
+      // dbHelper.addUserToFollowers("https://www.youtube.com/","huy@gmail.com");
+       //dbHelper.addUserToFollowers("https://www.youtube.com/","max@gmail.com");
+
+
+
   /*      Button button = view.findViewById(R.id.buttonreaderf); // Assurez-vous que le bouton a l'ID correct
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,36 +139,26 @@ public class NotifFollowsFragment extends Fragment {
         // Utilisez la référence à Site1
 
 
-        ArrayList<users> Tabuser1folow = Site1.getFollowersList(); // Assurez-vous d'avoir une référence à Site1
 
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor cursor=db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
+                DatabaseHelper.URL + " = 'https://www.youtube.com/'", null);
+
+        String tabfollowers=dbHelper.fetchStringFromCursor(cursor);
+        String[] tabfollowerstab=dbHelper.stringToArray(tabfollowers);
         // Parcourez la liste des utilisateurs
-        for (users user : Tabuser1folow) {
-            // Créez un nouveau fragment pour chaque utilisateur
-            UsersFragment userFragment = UsersFragment.newInstance(user.getName()); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+        for (String user : tabfollowerstab) {
 
-           // Follows_ExempleFragment fFragment2 = Follows_ExempleFragment.newInstance(user.getName());
+            UsersFragment userFragment = UsersFragment.newInstance(user); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+
+
             // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
             FragmentManager fragmentManager = getChildFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.conteneurusers, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
             fragmentTransaction.commit();
-
-
-
-
-    /*        LinearLayout followclic = getActivity().findViewById(R.id.followclic);
-
-            followclic.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Navigation.findNavController(v).navigate(R.id.follows_ExempleFragment);
-                }
-            });*/
-
-
-
-
-
 
         }
 
