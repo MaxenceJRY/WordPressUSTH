@@ -11,4 +11,10 @@
     <color name="disable">#A8A8A8</color>
     <color name="separation">#606C6C6C</color>
     <color name="text">#FF000000</color>
+    <color name="colorE4EEF5">#E4EEF5</color>
+    <color name="color4CAF50">#4CAF50</color>
+    <color name="colorF6F6F6">#F6F6F6</color>
+    <color name="color008710">#008710</color>
+    <color name="color6B6B6B5">#6B6B6B</color>
+    <color name="colorE2E2E2">#E2E2E2</color>
 </resources>

@@ -1,6 +1,8 @@
 package vn.edu.usth.wordpress25.ui.me;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -16,9 +18,18 @@ import android.content.SharedPreferences;
 import android.widget.TextView;
 
 import vn.edu.usth.wordpress25.R;
+import vn.edu.usth.wordpress25.UserManager;
+import vn.edu.usth.wordpress25.ui.DatabaseHelper;
+
 public class myprofile extends Fragment {
 
-    // ... (autres parties de votre code)
+    private DatabaseHelper dbHelper;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dbHelper = new DatabaseHelper(getContext());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,21 +64,34 @@ public class myprofile extends Fragment {
                 showDialogAboutMe();
             }
         });
+        Cursor userDataCursor = getUserData(UserManager.getInstance().getLoggedInEmail());
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        String loggedInFirstname = sharedPreferences.getString("loggedInFirstname", "");
-        String loggedInLastname = sharedPreferences.getString("loggedInLastname", "");
-        String loggedInDisplayname = sharedPreferences.getString("loggedInDisplayname", "");
-        TextView textView = view.findViewById(R.id.textView);
-        TextView textView4 = view.findViewById(R.id.textView4);
-        TextView textView6 = view.findViewById(R.id.textView6);
-        textView6.setText(loggedInDisplayname);
-        textView4.setText(loggedInLastname);
-        textView.setText(loggedInFirstname);
+        if (userDataCursor != null && userDataCursor.moveToFirst()) {
+            String loggedInFirstname = userDataCursor.getString(3);
+            String loggedInLastname = userDataCursor.getString(4);
+            String loggedInDisplayname = userDataCursor.getString(5);
+
+            TextView textView = view.findViewById(R.id.textView);
+            TextView textView4 = view.findViewById(R.id.textView4);
+            TextView textView6 = view.findViewById(R.id.textView6);
+
+            textView6.setText(loggedInDisplayname);
+            textView4.setText(loggedInLastname);
+            textView.setText(loggedInFirstname);
+
+            userDataCursor.close();
+        }
 
         return view;
     }
 
+    private Cursor getUserData(String email) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                DatabaseHelper.EMAIL + " = ?", new String[]{email});
+
+        return cursor;
+    }
     private void showDialogFirst() {
         DialogFragment dialogFragment = new First_Name();
         dialogFragment.show(getChildFragmentManager(), "My First Name");
@@ -87,14 +111,13 @@ public class myprofile extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            // Utilisez NavController pour revenir en arrière
             NavHostFragment.findNavController(this).navigateUp();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
     public void onFirstNameChanged(String newFirstName) {
-        TextView textView = getView().findViewById(R.id.textView); // Assurez-vous que c'est le bon ID
+        TextView textView = getView().findViewById(R.id.textView);
         textView.setText(newFirstName);
     }
 

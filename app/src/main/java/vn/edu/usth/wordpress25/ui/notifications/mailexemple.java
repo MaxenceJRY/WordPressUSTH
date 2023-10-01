@@ -3,21 +3,20 @@ package vn.edu.usth.wordpress25.ui.notifications;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import vn.edu.usth.wordpress25.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NotifAllFragment#newInstance} factory method to
+ * Use the {@link mailexemple#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotifAllFragment extends Fragment {
+public class mailexemple extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,8 +26,10 @@ public class NotifAllFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView recyclerView;
 
-    public NotifAllFragment() {
+
+    public mailexemple() {
         // Required empty public constructor
     }
 
@@ -38,11 +39,11 @@ public class NotifAllFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NotifAllFragment.
+     * @return A new instance of fragment mailexemple.
      */
     // TODO: Rename and change types and number of parameters
-    public static NotifAllFragment newInstance(String param1, String param2) {
-        NotifAllFragment fragment = new NotifAllFragment();
+    public static mailexemple newInstance(String param1, String param2) {
+        mailexemple fragment = new mailexemple();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,16 +64,6 @@ public class NotifAllFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View view=inflater.inflate(R.layout.fragment_notif_all,container,false);
-        LinearLayout mail1 = view.findViewById(R.id.mail11);
-
-        mail1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.mail15);
-            }
-        });
-        return view;
+        return inflater.inflate(R.layout.fragment_mailexemple, container, false);
     }
 }

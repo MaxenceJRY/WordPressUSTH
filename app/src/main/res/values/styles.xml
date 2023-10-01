@@ -5,7 +5,18 @@
     </style>
 
     <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="android:textSize">10dp</item> <!-- Définissez ici la taille de texte souhaitée -->
+        <item name="android:textSize">10sp</item> <!-- Définissez ici la taille de texte souhaitée -->
         <!-- Autres attributs personnalisés pour les onglets -->
+    </style>
+
+    <style name="SheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <!--<item couponName="android:windowCloseOnTouchOutside">false</item>-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 </resources>

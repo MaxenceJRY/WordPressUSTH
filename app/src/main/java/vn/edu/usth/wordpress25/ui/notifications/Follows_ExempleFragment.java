@@ -3,21 +3,22 @@ package vn.edu.usth.wordpress25.ui.notifications;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import vn.edu.usth.wordpress25.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NotifAllFragment#newInstance} factory method to
+ * Use the {@link Follows_ExempleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotifAllFragment extends Fragment {
+public class Follows_ExempleFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +29,7 @@ public class NotifAllFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public NotifAllFragment() {
+    public Follows_ExempleFragment() {
         // Required empty public constructor
     }
 
@@ -36,16 +37,16 @@ public class NotifAllFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NotifAllFragment.
+     * @param username Parameter 1.
+     //* @param param2 Parameter 2.
+     * @return A new instance of fragment Follows_ExempleFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NotifAllFragment newInstance(String param1, String param2) {
-        NotifAllFragment fragment = new NotifAllFragment();
+    public static Follows_ExempleFragment newInstance(String username) {
+        Follows_ExempleFragment fragment = new Follows_ExempleFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, username);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,16 +64,27 @@ public class NotifAllFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_follows__exemple, container, false);
+        // Référence au TextView
+        TextView usernameTextView = view.findViewById(R.id.username2);
 
-        View view=inflater.inflate(R.layout.fragment_notif_all,container,false);
-        LinearLayout mail1 = view.findViewById(R.id.mail11);
+        // Obtenez le nom de l'utilisateur (remplacez ceci par votre propre logique)
+        String userName = mParam1;
 
-        mail1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.mail15);
-            }
-        });
-        return view;
+        // Définissez le texte du TextView avec le nom de l'utilisateur
+        usernameTextView.setText(userName);
+        return inflater.inflate(R.layout.fragment_follows__exemple, container, false);
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Utilisez NavController pour revenir en arrière
+            NavHostFragment.findNavController(this).navigateUp();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
