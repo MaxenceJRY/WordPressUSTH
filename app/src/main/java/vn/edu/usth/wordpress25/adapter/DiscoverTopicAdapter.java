@@ -5,18 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-<<<<<<< HEAD
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-=======
-import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
->>>>>>> origin/master
 import vn.edu.usth.wordpress25.databinding.ItemDiscoverTopicBinding;
 import vn.edu.usth.wordpress25.model.ChooseTopic;
 
