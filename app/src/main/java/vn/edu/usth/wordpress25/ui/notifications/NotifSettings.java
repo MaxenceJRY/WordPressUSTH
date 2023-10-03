@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import vn.edu.usth.wordpress25.R;
 
@@ -29,7 +31,8 @@ public class NotifSettings extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private Switch switchButton;
+    private LinearLayout linearLayout1;
     public NotifSettings() {
         // Required empty public constructor
     }
@@ -54,12 +57,17 @@ public class NotifSettings extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -69,13 +77,32 @@ public class NotifSettings extends Fragment {
         View view=inflater.inflate(R.layout.fragment_notif_settings,container,false);
         LinearLayout other = view.findViewById(R.id.other);
 
+
         other.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.commentsononthersites);
             }
         });
+
+        switchButton = view.findViewById(R.id.switch1);
+        linearLayout1 = view.findViewById(R.id.linearlayoutnotifsett);
+        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Si le Switch est activé (ON), affichez les LinearLayout, sinon cachez-les
+                if (isChecked) {
+                    linearLayout1.setVisibility(View.VISIBLE);
+
+                } else {
+                    linearLayout1.setVisibility(View.GONE);
+
+                }
+            }
+        });
         return view;
+
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -86,4 +113,6 @@ public class NotifSettings extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

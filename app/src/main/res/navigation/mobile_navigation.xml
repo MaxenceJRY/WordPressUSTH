@@ -113,4 +113,27 @@
         android:name="vn.edu.usth.wordpress25.ui.notifications.Mail1"
         android:label="fragment_mail1"
         tools:layout="@layout/fragment_mail1" />
+    <fragment
+        android:id="@+id/follows_ExempleFragment"
+        android:name="vn.edu.usth.wordpress25.ui.notifications.Follows_ExempleFragment"
+        android:label="fragment_follows__exemple"
+        tools:layout="@layout/fragment_follows__exemple" />
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="vn.edu.usth.wordpress25.ui.notifications.UsersFragment"
+        android:label="fragment_users"
+        tools:layout="@layout/fragment_users" >
+        <action
+            android:id="@+id/action_usersFragment_to_follows_ExempleFragment"
+            app:destination="@id/follows_ExempleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notifFollowsFragment"
+        android:name="vn.edu.usth.wordpress25.ui.notifications.NotifFollowsFragment"
+        android:label="fragment_notif_follows"
+        tools:layout="@layout/fragment_notif_follows" >
+        <action
+            android:id="@+id/action_notifFollowsFragment_to_follows_ExempleFragment"
+            app:destination="@id/follows_ExempleFragment" />
+    </fragment>
 </navigation>

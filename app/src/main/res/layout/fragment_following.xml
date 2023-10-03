@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Reader.following"
+    tools:context=".ui.Reader.FollowingFragment"
     android:orientation="vertical"
     android:id="@+id/combo">
 
@@ -14,24 +15,31 @@
         android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
+        android:id="@+id/lnFilter"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row"
         android:orientation="horizontal"
-        android:paddingLeft="24dp">
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
 
         <ImageView
-            android:layout_width="@dimen/row"
-            android:layout_height="@dimen/row"
+            android:layout_gravity="center"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:src="@drawable/filter"
-            android:layout_marginRight="24dp"></ImageView>
+            android:layout_marginEnd="18dp"
+            tools:ignore="ContentDescription"
+            app:tint="#737373" />
         <TextView
+            android:textColor="@color/black"
             android:id="@+id/textView29"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="Filter"
-            android:textSize="20dp" />
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <RelativeLayout
