@@ -5,6 +5,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_me">About me</string>
     <string name="title_activity_account_settings">Account Settings</string>
+    <string name="lorem_ipsum">Loren Ipsum</string>
     <!-- Dimensions -->
     <dimen name="row">48dp</dimen>
     <string name="title_activity_my_profil">MyProfile</string>

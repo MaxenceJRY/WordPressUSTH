@@ -5,9 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import vn.edu.usth.wordpress25.ui.notifications.NotifCommentsFragment;
-import vn.edu.usth.wordpress25.ui.notifications.NotifFollowsFragment;
-
 public class ReaderPagerAdapter extends FragmentPagerAdapter {
 
     public ReaderPagerAdapter(FragmentManager fm) {
@@ -19,7 +16,7 @@ public class ReaderPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new following();
+                return new FollowingFragment();
             case 1:
                 return new Discover();
             case 2:

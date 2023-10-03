@@ -11,21 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 import vn.edu.usth.wordpress25.R;
 
@@ -55,8 +42,6 @@ public class First_Name extends DialogFragment {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("loggedInFirstname", newFirstName);
                         editor.apply();
-
-
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

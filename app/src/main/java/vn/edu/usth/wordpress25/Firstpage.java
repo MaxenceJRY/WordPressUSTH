@@ -22,10 +22,17 @@ public class Firstpage extends AppCompatActivity {
         setContentView(R.layout.fragment_firstpage);
         getSupportActionBar().hide();
         Button loginButton = findViewById(R.id.button7);
+        Button signin = findViewById(R.id.SignIn);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToMainActivity(view);
+            }
+        });
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSign(view);
             }
         });
     }
@@ -39,5 +46,11 @@ public class Firstpage extends AppCompatActivity {
                 .replace(R.id.firstpage, connectionFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+    public void goToSign(View view) {
+
+        Intent intent = new Intent(this, Registration.class);
+
+        startActivity(intent);
     }
 }
