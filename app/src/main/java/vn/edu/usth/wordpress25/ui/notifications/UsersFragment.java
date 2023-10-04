@@ -3,6 +3,7 @@ package vn.edu.usth.wordpress25.ui.notifications;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -39,7 +40,7 @@ public class UsersFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param username Parameter 1.
-   //  * @param param2 Parameter 2.
+    //  * @param param2 Parameter 2.
      * @return A new instance of fragment UsersFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -49,7 +50,6 @@ public class UsersFragment extends Fragment {
         args.putString(ARG_PARAM1, username);
         //args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
-
         return fragment;
     }
 
@@ -66,7 +66,7 @@ public class UsersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       // return inflater.inflate(R.layout.fragment_users, container, false);
+        // return inflater.inflate(R.layout.fragment_users, container, false);
         View view = inflater.inflate(R.layout.fragment_users, container, false);
 
         // Référence au TextView
@@ -76,29 +76,17 @@ public class UsersFragment extends Fragment {
         String userName = mParam1;
 
         // Définissez le texte du TextView avec le nom de l'utilisateur
-        usernameTextView.setText(userName);
+        usernameTextView.setText(userName + " follows you");
 
 
 
         Bundle args = getArguments();
 
-            final String username = args.getString("userName");
+        final String username = args.getString("userName");
 
-            // Trouvez le bouton dans la vue du fragment
-        LinearLayout followclic = view.findViewById(R.id.followclic);
-
-            followclic.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Ouvrez le fragment follows_ExempleFragment en utilisant la navigation
-                    Bundle bundle = new Bundle();
-                    bundle.putString("userName", userName);
-
-                    Navigation.findNavController(v).navigate(R.id.follows_ExempleFragment, bundle);
-                }
-            });
 
 
         return view;
     }
+
 }

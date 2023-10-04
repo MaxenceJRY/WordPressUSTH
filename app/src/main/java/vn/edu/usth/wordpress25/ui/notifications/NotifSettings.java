@@ -1,8 +1,12 @@
 package vn.edu.usth.wordpress25.ui.notifications;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -15,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import vn.edu.usth.wordpress25.R;
+import vn.edu.usth.wordpress25.UserManager;
+import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +38,7 @@ public class NotifSettings extends Fragment {
     private String mParam1;
     private String mParam2;
     private Switch switchButton;
+    private DatabaseHelper dbHelper;
     private LinearLayout linearLayout1;
     public NotifSettings() {
         // Required empty public constructor
@@ -66,7 +73,10 @@ public class NotifSettings extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        dbHelper = new DatabaseHelper(getContext());
 
+        // Créer la table site_table si elle n'existe pas encore
+       // dbHelper.onCreate(dbHelper.getWritableDatabase());
 
     }
 
@@ -77,7 +87,12 @@ public class NotifSettings extends Fragment {
         View view=inflater.inflate(R.layout.fragment_notif_settings,container,false);
         LinearLayout other = view.findViewById(R.id.other);
 
+        if (dbHelper == null) {
+            dbHelper = new DatabaseHelper(getContext());
+        }
+        removeAllFragments();
 
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
         other.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +115,39 @@ public class NotifSettings extends Fragment {
                 }
             }
         });
+
+        if (dbHelper == null) {
+            dbHelper = new DatabaseHelper(getContext());
+        }
+        removeAllFragments();
+
+
+
+        Cursor userDataCursor = getUserData(UserManager.getInstance().getLoggedInEmail());
+        String userdata=dbHelper.fetchStringFromCursor(userDataCursor);
+        Cursor cursorsite = db.rawQuery("SELECT TABFOLLOWS FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
+
+        String tabsite = dbHelper.fetchStringFromCursor(cursorsite);
+
+        String[] tabfollows=dbHelper.stringToArray(tabsite);
+        // Parcourez la liste des utilisateurs
+        for (String site : tabfollows) {
+
+            SiteFollowsFragment siteFollowsFragment = SiteFollowsFragment.newInstance(site); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+
+            // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
+            FragmentManager fragmentManager = getChildFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.container5, siteFollowsFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+
+            fragmentTransaction.commit();
+
+        }
+
+
+
+
         return view;
 
 
@@ -112,6 +160,23 @@ public class NotifSettings extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    private Cursor getUserData(String email) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                DatabaseHelper.EMAIL + " = ?", new String[]{email});
+
+        return cursor;
+    }
+    private void removeAllFragments() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        for (Fragment fragment : fragmentManager.getFragments()) {
+            fragmentTransaction.remove(fragment);
+        }
+
+        fragmentTransaction.commit();
     }
 
 

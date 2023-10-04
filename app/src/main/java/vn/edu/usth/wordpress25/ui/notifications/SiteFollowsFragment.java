@@ -3,20 +3,20 @@ package vn.edu.usth.wordpress25.ui.notifications;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import vn.edu.usth.wordpress25.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link mailexemple#newInstance} factory method to
+ * Use the {@link SiteFollowsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class mailexemple extends Fragment {
+public class SiteFollowsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,10 +26,8 @@ public class mailexemple extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private RecyclerView recyclerView;
 
-
-    public mailexemple() {
+    public SiteFollowsFragment() {
         // Required empty public constructor
     }
 
@@ -37,16 +35,16 @@ public class mailexemple extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment mailexemple.
+     * @param sitename Parameter 1.
+
+     * @return A new instance of fragment SiteFollowsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static mailexemple newInstance(String param1, String param2) {
-        mailexemple fragment = new mailexemple();
+    public static SiteFollowsFragment newInstance(String sitename) {
+        SiteFollowsFragment fragment = new SiteFollowsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, sitename);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,6 +62,25 @@ public class mailexemple extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mailexemple, container, false);
+        View view = inflater.inflate(R.layout.fragment_site_follows, container, false);
+
+        // Référence au TextView
+        TextView sitenameTextView = view.findViewById(R.id.sitename3);
+
+        // Obtenez le nom de l'utilisateur (remplacez ceci par votre propre logique)
+        String sitename = mParam1;
+
+        // Définissez le texte du TextView avec le nom de l'utilisateur
+        sitenameTextView.setText(sitename);
+
+
+
+        Bundle args = getArguments();
+
+        final String username = args.getString("userName");
+
+
+
+        return view;
     }
 }

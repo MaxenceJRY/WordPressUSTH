@@ -1,14 +1,24 @@
 package vn.edu.usth.wordpress25.ui.notifications;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import vn.edu.usth.wordpress25.R;
+import vn.edu.usth.wordpress25.UserManager;
+import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,28 +27,19 @@ import vn.edu.usth.wordpress25.R;
  */
 public class NotifUnreadFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private DatabaseHelper dbHelper;
+    private LinearLayout mail1;
+    private boolean isMail1Clicked = false;
 
     public NotifUnreadFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NotifUnreadFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static NotifUnreadFragment newInstance(String param1, String param2) {
         NotifUnreadFragment fragment = new NotifUnreadFragment();
         Bundle args = new Bundle();
@@ -60,7 +61,90 @@ public class NotifUnreadFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notif_unread, container, false);
+        View view = inflater.inflate(R.layout.fragment_notif_unread, container, false);
+
+        mail1 = view.findViewById(R.id.conteneurusers3);
+
+        // Lisez l'état du clic dans les préférences partagées
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        isMail1Clicked = sharedPreferences.getBoolean("mail1_clicked", false);
+
+        // Si le LinearLayout a été cliqué, masquez-le définitivement
+        if (isMail1Clicked) {
+            mail1.setVisibility(View.GONE);
+        } else {
+            // Si le LinearLayout n'a pas encore été cliqué, configurez le clic
+            mail1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    toggleMail1Visibility();
+                    Navigation.findNavController(v).navigate(R.id.follows_ExempleFragment);
+
+                    // Enregistrez dans les préférences partagées que le LinearLayout a été cliqué
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("mail1_clicked", true);
+                    editor.apply();
+                }
+            });
+        }
+
+        if (dbHelper == null) {
+            dbHelper = new DatabaseHelper(getContext());
+        }
+        removeAllFragments();
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor userDataCursor = getUserData(UserManager.getInstance().getLoggedInEmail());
+        String userdata = dbHelper.fetchStringFromCursor(userDataCursor);
+        Cursor cursorsite = db.rawQuery("SELECT TABMYSITES FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
+
+        String sitename = dbHelper.fetchStringFromCursor(cursorsite);
+
+        Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
+                DatabaseHelper.URL + " = ?", new String[]{sitename});
+
+        String tabfollowers = dbHelper.fetchStringFromCursor(cursor);
+        String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
+        // Parcourez la liste des utilisateurs
+        for (String user : tabfollowerstab) {
+            UsersFragment userFragment = UsersFragment.newInstance(user);
+            FragmentManager fragmentManager = getChildFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.conteneurusers3, userFragment);
+            fragmentTransaction.commit();
+        }
+
+        return view;
+    }
+
+    private Cursor getUserData(String email) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                DatabaseHelper.EMAIL + " = ?", new String[]{email});
+        return cursor;
+    }
+
+    private void removeAllFragments() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        for (Fragment fragment : fragmentManager.getFragments()) {
+            fragmentTransaction.remove(fragment);
+        }
+
+        fragmentTransaction.commit();
+    }
+
+    private void toggleMail1Visibility() {
+        if (mail1.getVisibility() == View.VISIBLE) {
+            mail1.setVisibility(View.GONE);
+            isMail1Clicked = true;
+        } else {
+            mail1.setVisibility(View.VISIBLE);
+            isMail1Clicked = false;
+        }
     }
 }
+

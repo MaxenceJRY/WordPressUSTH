@@ -21,8 +21,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 
 import vn.edu.usth.wordpress25.R;
+import vn.edu.usth.wordpress25.UserManager;
 import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 import vn.edu.usth.wordpress25.ui.Site;
+import vn.edu.usth.wordpress25.ui.me.MeFragment;
 import vn.edu.usth.wordpress25.ui.users;
 
 /**
@@ -92,6 +94,18 @@ public class NotifFollowsFragment extends Fragment {
 
             // Créer la table site_table si elle n'existe pas encore
             dbHelper.onCreate(dbHelper.getWritableDatabase());
+
+
+        /*    dbHelper.insertData("mathis@gmail.com","123","mathis","andre","mat78","mat78");
+            dbHelper.insertDataSITE("https://www.epf.com/","epf","mathis@gmail.com");
+            dbHelper.addSiteToMySites("mathis@gmail.com","https://www.epf.com/");
+
+            dbHelper.insertData("benoit@gmail.com","123","benoit","benoit","benoit","benoit");
+
+            // dbHelper.insertData("max@gmail.com","123","maxence","juery","juery78","juery78");
+
+            dbHelper.addUserToFollowers("https://www.epf.com/","benoit@gmail.com");
+            dbHelper.addUserToFollowers("https://www.epf.com/","max@gmail.com");*/
         }
     }
 
@@ -99,25 +113,30 @@ public class NotifFollowsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notif_follows, container, false);
+        LinearLayout mail1 = view.findViewById(R.id.conteneurusers);
 
+        mail1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.follows_ExempleFragment);
+            }
+        });
         if (dbHelper == null) {
             dbHelper = new DatabaseHelper(getContext());
         }
 
 
+// Supprimez tous les fragments existants avant d'en ajouter de nouveaux
+        removeAllFragments();
 
 
 
 
-      //  dbHelper.insertDataSITE("https://www.youtube.com/","Youtube","vlad@gmail.com");
-       // dbHelper.insertDataSITE("https://www.pizza4P.com/","Pizza4P","max@gmail.com");
+        //  dbHelper.insertDataSITE("https://www.youtube.com/","Youtube","vlad@gmail.com");
+        // dbHelper.insertDataSITE("https://www.pizza4P.com/","Pizza4P","max@gmail.com");
         //dbHelper.insertDataSITE("https://www.facebook.com/","Facebook","huy@gmail.com");
 
-     //   dbHelper.insertData("vlad@gmail.com","123","vladimir","michot","vlad78","vlad78");
-       // dbHelper.insertData("max@gmail.com","123","maxence","juery","juery78","juery78");
 
-      // dbHelper.addUserToFollowers("https://www.youtube.com/","huy@gmail.com");
-       //dbHelper.addUserToFollowers("https://www.youtube.com/","max@gmail.com");
 
 
 
@@ -143,8 +162,16 @@ public class NotifFollowsFragment extends Fragment {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        Cursor cursor=db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
-                DatabaseHelper.URL + " = 'https://www.youtube.com/'", null);
+        Cursor userDataCursor = getUserData(UserManager.getInstance().getLoggedInEmail());
+String userdata=dbHelper.fetchStringFromCursor(userDataCursor);
+        Cursor cursorsite = db.rawQuery("SELECT TABMYSITES FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
+
+        String sitename = dbHelper.fetchStringFromCursor(cursorsite);
+
+        Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
+                DatabaseHelper.URL + " = ?", new String[]{sitename});
+
 
         String tabfollowers=dbHelper.fetchStringFromCursor(cursor);
         String[] tabfollowerstab=dbHelper.stringToArray(tabfollowers);
@@ -153,15 +180,34 @@ public class NotifFollowsFragment extends Fragment {
 
             UsersFragment userFragment = UsersFragment.newInstance(user); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
 
-
             // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
             FragmentManager fragmentManager = getChildFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.conteneurusers, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+
             fragmentTransaction.commit();
 
         }
 
         return view;
     }
+
+    private Cursor getUserData(String email) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                DatabaseHelper.EMAIL + " = ?", new String[]{email});
+
+        return cursor;
+    }
+    private void removeAllFragments() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        for (Fragment fragment : fragmentManager.getFragments()) {
+            fragmentTransaction.remove(fragment);
+        }
+
+        fragmentTransaction.commit();
+    }
+
 }

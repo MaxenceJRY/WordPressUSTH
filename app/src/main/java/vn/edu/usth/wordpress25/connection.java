@@ -36,6 +36,7 @@ public class connection extends Fragment {
 
     public connection() {
     }
+
     public static connection newInstance(String param1, String param2) {
         connection fragment = new connection();
         Bundle args = new Bundle();
@@ -61,6 +62,19 @@ public class connection extends Fragment {
         Button loginButton = view.findViewById(R.id.button_login);
         EditText emailEditText = view.findViewById(R.id.edit_text_email);
         EditText passwordEditText = view.findViewById(R.id.edit_text_password);
+
+    /*   dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
+        dbHelper.insertDataSITE("https://www.usth.com/","usth","augustin@gmail.com");
+        dbHelper.addSiteToMySites("augustin@gmail.com","https://www.usth.com/");
+
+        dbHelper.insertData("fabien@gmail.com","123","fabien","fabien","fabien","fabien");
+
+        // dbHelper.insertData("max@gmail.com","123","maxence","juery","juery78","juery78");
+
+        dbHelper.addUserToFollowers("https://www.usth.com/","fabien@gmail.com");*/
+        //dbHelper.addUserToFollowers("https://www.epf.com/","max@gmail.com");
+        //dbHelper.addSiteToFollows("augustin@gmail.com","https://www.epf.com/");
+        //dbHelper.addSiteToFollows("augustin@gmail.com","https://www.blablacar.com/");
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

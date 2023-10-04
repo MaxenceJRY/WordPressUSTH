@@ -150,6 +150,62 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         siteCursor.close();
     }
+    public void addSiteToMySites(String userId, String siteUrl) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Vérifier si l'utilisateur avec userId existe déjà dans la table user_table
+        Cursor userCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + "=?", new String[]{userId});
+        if (userCursor.getCount() > 0) {
+            // L'utilisateur existe, nous pouvons ajouter siteUrl à TABMYSITES
+
+            // Tout d'abord, obtenir la liste actuelle de TABMYSITES pour cet utilisateur
+            userCursor.moveToFirst();
+            String currentMySites = userCursor.getString(6);
+
+            // Ajouter siteUrl à la liste de TABMYSITES de l'utilisateur
+            if (currentMySites == null || currentMySites.isEmpty()) {
+                currentMySites = siteUrl;
+            } else {
+                currentMySites += "," + siteUrl;
+            }
+
+            // Mettre à jour la liste de TABMYSITES dans la table user_table
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(TABMYSITES, currentMySites);
+            db.update(TABLE_NAME, contentValues, EMAIL + "=?", new String[]{userId});
+        }
+
+        userCursor.close();
+    }
+    public void addSiteToFollows(String userId, String siteUrl) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Vérifier si l'utilisateur avec userId existe déjà dans la table user_table
+        Cursor userCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + "=?", new String[]{userId});
+        if (userCursor.getCount() > 0) {
+            // L'utilisateur existe, nous pouvons ajouter siteUrl à TABFOLLOWS
+
+            // Tout d'abord, obtenir la liste actuelle de TABFOLLOWS pour cet utilisateur
+            userCursor.moveToFirst();
+            String currentFollows = userCursor.getString(5);
+
+            // Ajouter siteUrl à la liste de TABFOLLOWS de l'utilisateur
+            if (currentFollows == null || currentFollows.isEmpty()) {
+                currentFollows = siteUrl;
+            } else {
+                currentFollows += "," + siteUrl;
+            }
+
+            // Mettre à jour la liste de TABFOLLOWS dans la table user_table
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(TABFOLLOWS, currentFollows);
+            db.update(TABLE_NAME, contentValues, EMAIL + "=?", new String[]{userId});
+        }
+
+        userCursor.close();
+    }
+
+
     public static String[] stringToArray(String inputString) {
         // Utilisez la méthode split() pour diviser la chaîne en utilisant des virgules comme séparateurs
         String[] elements = inputString.split(",");

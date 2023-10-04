@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.notifications.mailexemple"
-    android:orientation="vertical">
+    tools:context=".ui.notifications.SiteFollowsFragment"
+    android:orientation="vertical"
+    android:id="@+id/followclic7"
+    >
 
     <LinearLayout
-        android:id="@+id/mail1"
+
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginLeft="24dp"
@@ -16,32 +18,22 @@
         android:divider="@color/black"
         android:orientation="horizontal">
 
-        <ImageView
-
-            android:layout_width="36dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="12dp"
-            android:src="@drawable/ic_wordpress" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <TextView
-
+                android:id="@+id/sitename3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="New google Sign-in"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Google Sign-in from deathload@gmail.com"
-                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 
