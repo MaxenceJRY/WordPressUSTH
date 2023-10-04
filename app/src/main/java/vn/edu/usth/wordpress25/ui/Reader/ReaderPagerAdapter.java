@@ -18,7 +18,7 @@ public class ReaderPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new FollowingFragment();
             case 1:
-                return new Discover();
+                return new DiscoverFragment();
             case 2:
                 return new Likes();
             case 3:

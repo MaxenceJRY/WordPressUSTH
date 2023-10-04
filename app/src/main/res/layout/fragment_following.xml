@@ -2,91 +2,103 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/combo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Reader.FollowingFragment"
     android:orientation="vertical"
-    android:id="@+id/combo">
+    tools:context=".ui.Reader.FollowingFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/separation"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:background="@color/separation" />
 
-    <LinearLayout
+        <LinearLayout
         android:id="@+id/lnFilter"
-        android:foreground="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row"
+        android:foreground="?attr/selectableItemBackground"
         android:orientation="horizontal"
         android:paddingStart="24dp"
         android:paddingEnd="24dp">
 
         <ImageView
-            android:layout_gravity="center"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/filter"
+            android:layout_gravity="center"
             android:layout_marginEnd="18dp"
-            tools:ignore="ContentDescription"
-            app:tint="#737373" />
-        <TextView
-            android:textColor="@color/black"
-            android:id="@+id/textView29"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="Filter"
-            android:textSize="16sp"
-            tools:ignore="HardcodedText" />
-    </LinearLayout>
+            android:src="@drawable/filter"
+            app:tint="#737373"
+            tools:ignore="ContentDescription" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/separation"
-        android:layout_gravity="center_horizontal"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    <fragment
-        android:id="@+id/fragment11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/separation"
-        android:layout_gravity="center_horizontal"/>
-    <fragment
-        android:id="@+id/fragment22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/separation"
-        android:layout_gravity="center_horizontal"/>
-    <fragment
-        android:id="@+id/fragment32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="vn.edu.usth.wordpress25.ui.Reader.Following_example"/>
-
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"></LinearLayout>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:visibility="visible"
+                android:id="@+id/tvDefaultFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Filter"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:id="@+id/lnFilterTopic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvFilterTopic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Filter"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/imgEndFilter"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_close"
+                    app:tint="#737373"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+        </FrameLayout>
+
     </LinearLayout>
-    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/separation" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTopic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:scrollbars="none"
+        android:splitMotionEvents="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="30"
+        tools:listitem="@layout/item_discover_topic" />
+
+
 </LinearLayout>

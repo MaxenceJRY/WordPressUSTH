@@ -1,22 +1,25 @@
 package vn.edu.usth.wordpress25.ui.Reader;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-
-import vn.edu.usth.wordpress25.R;
+import vn.edu.usth.wordpress25.databinding.FragmentDiscoverBinding;
+import vn.edu.usth.wordpress25.ui.Reader.discover.DiscoverTopicActivity;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Following_example_2#newInstance} factory method to
+ * Use the {@link DiscoverFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Following_example_2 extends Fragment {
+public class DiscoverFragment extends Fragment{
 
-/*    // TODO: Rename parameter arguments, choose names that match
+    private FragmentDiscoverBinding binding;
+
+    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -25,7 +28,7 @@ public class Following_example_2 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Following_example_2() {
+    public DiscoverFragment() {
         // Required empty public constructor
     }
 
@@ -35,11 +38,11 @@ public class Following_example_2 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Following_example_2.
-
+     * @return A new instance of fragment Discover.
+     */
     // TODO: Rename and change types and number of parameters
-    public static Following_example_2 newInstance(String param1, String param2) {
-        Following_example_2 fragment = new Following_example_2();
+    public static DiscoverFragment newInstance(String param1, String param2) {
+        DiscoverFragment fragment = new DiscoverFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -54,12 +57,41 @@ public class Following_example_2 extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
-*/
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_following_example_2, container, false);
+        binding = FragmentDiscoverBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        initControl();
+        initData();
+        initViews();
+
+
+        return root;
+    }
+
+    private void initControl() {
+            binding.button.setOnClickListener(view -> gotoTopic());
+            binding.button2.setOnClickListener(view -> gotoTopic());
+            binding.button3.setOnClickListener(view -> gotoTopic());
+            binding.button4.setOnClickListener(view -> gotoTopic());
+    }
+
+    private void initData() {
+
+    }
+
+    private void initViews() {
+
+    }
+
+
+    private void gotoTopic() {
+        Intent intent = new Intent(requireActivity(), DiscoverTopicActivity.class);
+        requireActivity().startActivity(intent);
     }
 }
