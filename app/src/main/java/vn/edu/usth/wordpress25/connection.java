@@ -88,7 +88,7 @@ public class connection extends Fragment {
                     userManager.setLoggedInEmail(email);
                     goToMainActivity(view);
                 } else {
-                    Toast.makeText(getContext(), "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Email or password incorrect", Toast.LENGTH_SHORT).show();
                 }
             }
         });

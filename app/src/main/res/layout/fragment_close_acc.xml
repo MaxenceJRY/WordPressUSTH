@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="12dp"
     android:paddingTop="12dp"
-    tools:context=".ui.me.about_me">
+    tools:context=".ui.me.Close_acc">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -28,13 +28,12 @@
             android:textSize="16dp"></TextView>
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/editCloseAcc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"
             android:ems="10"
-            android:inputType="text"
-            android:text="" />
+            android:inputType="text"/>
 
     </LinearLayout>
 

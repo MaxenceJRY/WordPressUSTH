@@ -1,18 +1,22 @@
 package vn.edu.usth.wordpress25.ui.me;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import vn.edu.usth.wordpress25.R;
+import vn.edu.usth.wordpress25.UserManager;
+import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +24,8 @@ import vn.edu.usth.wordpress25.R;
  * create an instance of this fragment.
  */
 public class Account_settings extends Fragment {
+    private DatabaseHelper dbHelper;
+    String email, username;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,7 +61,8 @@ public class Account_settings extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        dbHelper = new DatabaseHelper(getContext());
+            setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -67,16 +74,22 @@ public class Account_settings extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account_settings, container, false);
-        LinearLayout email_add_layout = view.findViewById(R.id.emailadd);
         LinearLayout web_add_layout = view.findViewById(R.id.web_address);
         LinearLayout change_pass_layout = view.findViewById(R.id.change_pass);
         LinearLayout close_acc_layout = view.findViewById(R.id.close_acc);
-        email_add_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogEmailAdd();
-            }
-        });
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT email, username FROM " + DatabaseHelper.TABLE_NAME + " WHERE email = ?",
+                new String[]{UserManager.getInstance().getLoggedInEmail()});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            email = cursor.getString(0);
+            username = cursor.getString(1);
+        }
+        TextView usernamet = view.findViewById(R.id.textView);
+        TextView emailt = view.findViewById(R.id.textView4);
+        usernamet.setText(username);
+        emailt.setText(email);
         web_add_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

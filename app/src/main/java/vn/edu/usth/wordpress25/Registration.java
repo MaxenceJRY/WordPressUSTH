@@ -116,8 +116,8 @@ public class Registration extends AppCompatActivity {
                                 editpassword.getText().toString(),
                                 editfirstname.getText().toString(),
                                 editlastname.getText().toString(),
-                                editusername.getText().toString(),
-                                editfirstname.getText().toString()+" "+editlastname.getText().toString());
+                                editfirstname.getText().toString()+" "+editlastname.getText().toString(),
+                                editusername.getText().toString());
                         if (isInsert == true)
                             Toast.makeText(Registration.this, "Data inserted", Toast.LENGTH_SHORT).show();
                         else

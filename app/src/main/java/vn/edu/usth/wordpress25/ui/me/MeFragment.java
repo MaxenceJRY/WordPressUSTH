@@ -1,8 +1,6 @@
 package vn.edu.usth.wordpress25.ui.me;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -26,6 +24,8 @@ public class MeFragment extends Fragment {
 
     private DatabaseHelper dbHelper;
     private FragmentMeBinding binding;
+    String firstname;
+    String disp;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +85,26 @@ public class MeFragment extends Fragment {
             }
         });
 
-        Cursor userDataCursor = getUserData(UserManager.getInstance().getLoggedInEmail());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor first = db.rawQuery("SELECT firstname FROM " + DatabaseHelper.TABLE_NAME + " WHERE email = ?",
+                new String[]{UserManager.getInstance().getLoggedInEmail()});
+        Cursor display = db.rawQuery("SELECT displayname FROM " + DatabaseHelper.TABLE_NAME + " WHERE email = ?",
+                new String[]{UserManager.getInstance().getLoggedInEmail()});
+
+        if (first != null && first.moveToFirst()) {
+            firstname = first.getString(0);
+            TextView name = view.findViewById(R.id.Name);
+
+            name.setText(firstname);
+        }
+        if (display != null && display.moveToFirst()) {
+            disp = display.getString(0);
+            TextView surname = view.findViewById(R.id.Surname);
+
+            surname.setText(disp);
+        }
+
+       /* Cursor userDataCursor = getUserData(UserManager.getInstance().getLoggedInEmail());
 
         if (userDataCursor != null && userDataCursor.moveToFirst()) {
             String loggedInFirstname = userDataCursor.getString(3);
@@ -98,7 +117,7 @@ public class MeFragment extends Fragment {
             name.setText(loggedInFirstname);
 
             userDataCursor.close();
-        }
+        }*/
         return view;
     }
 
