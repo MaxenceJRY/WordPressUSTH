@@ -42,21 +42,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABFOLLOWERS = "tabfollowers";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + "(EMAIL STRING PRIMARY KEY, PASSWORD STRING, " +
-                "FIRSTNAME STRING, LASTNAME STRING, DISPLAYNAME STRING, USERNAME STRING,TABFOLLOWS STRING, TABMYSITES STRING)");
+        // Vérifier si les tables existent déjà
+        if (!isTableExists(db, TABLE_NAME) && !isTableExists(db, TABLE_NAME2)) {
+            // Créer la table user_table si elle n'existe pas
+            db.execSQL("create table " + TABLE_NAME + "(EMAIL STRING PRIMARY KEY, PASSWORD STRING, " +
+                    "FIRSTNAME STRING, LASTNAME STRING, DISPLAYNAME STRING, USERNAME STRING,TABFOLLOWS STRING, TABMYSITES STRING)");
 
-        db.execSQL("create table " + TABLE_NAME2 + "(URL STRING PRIMARY KEY, NAMESITE STRING, " +
-                "AUTHOR STRING, TABTAGS STRING, TABFOLLOWERS STRING)");
-
-
+            // Créer la table site_table si elle n'existe pas
+            db.execSQL("create table " + TABLE_NAME2 + "(URL STRING PRIMARY KEY, NAMESITE STRING, " +
+                    "AUTHOR STRING, TABTAGS STRING, TABFOLLOWERS STRING)");
+        }
     }
 
-
+    // Méthode pour vérifier si une table existe déjà dans la base de données
+    private boolean isTableExists(SQLiteDatabase db, String tableName) {
+        Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{tableName});
+        boolean tableExists = cursor.getCount() > 0;
+        cursor.close();
+        return tableExists;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -79,7 +88,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(LASTNAME,lastname);
         contentValues.put(DISPLAYNAME,displayname);
         contentValues.put(USERNAME,username);
-
         long result = db.insert(TABLE_NAME,null, contentValues);
         if (result == -1)
             return false;

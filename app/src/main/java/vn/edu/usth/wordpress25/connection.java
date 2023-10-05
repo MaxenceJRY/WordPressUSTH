@@ -49,6 +49,7 @@ public class connection extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbHelper = new DatabaseHelper(getContext());
+        dbHelper.onCreate(dbHelper.getWritableDatabase());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -63,7 +64,21 @@ public class connection extends Fragment {
         EditText emailEditText = view.findViewById(R.id.edit_text_email);
         EditText passwordEditText = view.findViewById(R.id.edit_text_password);
 
-    /*   dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
+        //  ******** Remove the comment and run the code and go to connect, after comment the same block ******
+
+
+        /*
+        dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
+        dbHelper.insertDataSITE("https://www.usth.com/","usth","augustin@gmail.com");
+        dbHelper.addSiteToMySites("augustin@gmail.com","https://www.usth.com/");
+        dbHelper.insertData("fabien@gmail.com","123","fabien","fabien","fabien","fabien");
+        dbHelper.addUserToFollowers("https://www.usth.com/","fabien@gmail.com");
+        */
+
+
+
+
+        /*   dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
         dbHelper.insertDataSITE("https://www.usth.com/","usth","augustin@gmail.com");
         dbHelper.addSiteToMySites("augustin@gmail.com","https://www.usth.com/");
 
