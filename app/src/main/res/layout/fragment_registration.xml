@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="View all data"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
     <EditText
         android:id="@+id/editTextUpdate"
