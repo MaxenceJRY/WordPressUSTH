@@ -92,7 +92,7 @@ public class connection extends Fragment {
         //dbHelper.addSiteToFollows("fabrice@gmail.com","https://www.airbnb.com/");
         //dbHelper.insertDataSITE("https://www.airbnb.com/","airbnb","augustin@gmail.com");
         //dbHelper.addUserToFollowers("https://www.airbnb.com/","fabrice@gmail.com");
-        dbHelper.addSiteToMySites("fabien@gmail.com","https://www.pizz.com/");
+        // dbHelper.addSiteToMySites("fabien@gmail.com","https://www.pizz.com/");
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

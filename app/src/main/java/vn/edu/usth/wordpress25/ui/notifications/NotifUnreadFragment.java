@@ -96,7 +96,7 @@ public class NotifUnreadFragment extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String sitename = dbHelper.fetchStringFromCursor(cursorsite);
-        if (sitename != "") {
+        if (sitename != ""&& sitename !=null) {
             String[] tabmysites = dbHelper.stringToArray(sitename);
             for (String site : tabmysites) {
 
@@ -104,7 +104,7 @@ public class NotifUnreadFragment extends Fragment {
                         DatabaseHelper.URL + " = ?", new String[]{sitename});
 
                 String tabfollowers = dbHelper.fetchStringFromCursor(cursor);
-                if (tabfollowers != "") {
+                if (tabfollowers != "" && tabfollowers != null) {
                     String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
                     // Parcourez la liste des utilisateurs
                     for (String user : tabfollowerstab) {

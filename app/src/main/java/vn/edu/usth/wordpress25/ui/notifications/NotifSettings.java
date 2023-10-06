@@ -130,7 +130,7 @@ public class NotifSettings extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String tabsite = dbHelper.fetchStringFromCursor(cursorsite);
-        if (tabsite != "") {
+        if (tabsite != "" && tabsite != null) {
             String[] tabfollows = dbHelper.stringToArray(tabsite);
 
             // Parcourez la liste des utilisateurs
@@ -151,7 +151,7 @@ public class NotifSettings extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String tabmysites = dbHelper.fetchStringFromCursor(cursormysite);
-        if (tabmysites != "") {
+        if (tabmysites != ""&& tabmysites !=null) {
             String[] tabmysite = dbHelper.stringToArray(tabmysites);
 
             // Parcourez la liste des utilisateurs

@@ -100,7 +100,7 @@ public class NotifAllFragment extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String sitename = dbHelper.fetchStringFromCursor(cursorsite);
-        if (sitename != "") {
+        if (sitename != "" && sitename !=null) {
             String[] tabmysites = dbHelper.stringToArray(sitename);
             for (String site : tabmysites){
 

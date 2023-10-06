@@ -2,9 +2,12 @@ package vn.edu.usth.wordpress25.ui.mysite;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,16 +21,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vn.edu.usth.wordpress25.R;
+import vn.edu.usth.wordpress25.UserManager;
 import vn.edu.usth.wordpress25.adapter.ChooseDomainAdapter;
 import vn.edu.usth.wordpress25.databinding.ActivityChooseDomainBinding;
 import vn.edu.usth.wordpress25.eventbus.MessageEvent;
 import vn.edu.usth.wordpress25.eventbus.PreferenceUtils;
 import vn.edu.usth.wordpress25.model.ChooseTopic;
 import vn.edu.usth.wordpress25.model.Domain;
+import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 
 public class ChooseDomainActivity extends AppCompatActivity {
 
     private ActivityChooseDomainBinding binding;
+    private DatabaseHelper dbHelper;
     private List<ChooseTopic> storageTheme = new ArrayList<>();
 
     private List<Domain> filterChooseDomains = new ArrayList<>();
@@ -42,6 +48,7 @@ public class ChooseDomainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelper = new DatabaseHelper(this);
         binding = ActivityChooseDomainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -59,8 +66,11 @@ public class ChooseDomainActivity extends AppCompatActivity {
             if (chooseTopic.website != null && !chooseTopic.website.isEmpty()){
                 if (getIndexChoosedTheme(storageTheme, chooseTopic) == -1 || (getIndexChoosedTheme(storageTheme, chooseTopic) != -1 && !findDomainExist(chooseTopic.website))) {
                     storageTheme.add(chooseTopic);
+                    dbHelper.insertDataSITE(chooseTopic.website,chooseTopic.name,UserManager.getInstance().getLoggedInEmail());
+                    dbHelper.addSiteToMySites(UserManager.getInstance().getLoggedInEmail(),chooseTopic.website);
                     PreferenceUtils.saveChooseThemes(storageTheme);
                 }
+
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.CHOOSED_SITE, chooseTopic));
                 ChooseDomainActivity.this.finish();
             } else {
@@ -122,6 +132,7 @@ public class ChooseDomainActivity extends AppCompatActivity {
         ArrayList<Domain> fullDomains = new ArrayList<>();
         for (int i = 0; i < domains.length; i++) {
             fullDomains.add(new Domain(i + 1, domainName + domains[i]));
+
         }
         return fullDomains;
     }

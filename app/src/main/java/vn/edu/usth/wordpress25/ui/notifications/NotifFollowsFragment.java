@@ -168,7 +168,7 @@ public class NotifFollowsFragment extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String sitename = dbHelper.fetchStringFromCursor(cursorsite);
-        if (sitename != "") {
+        if (sitename != ""&& sitename !=null) {
             String[] tabmysites = dbHelper.stringToArray(sitename);
             for (String site : tabmysites) {
                 Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
@@ -176,7 +176,7 @@ public class NotifFollowsFragment extends Fragment {
 
 
                 String tabfollowers = dbHelper.fetchStringFromCursor(cursor);
-                if (tabfollowers != "") {
+                if (tabfollowers != ""&& sitename !=tabfollowers) {
                     String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
                     // Parcourez la liste des utilisateurs
                     for (String user : tabfollowerstab) {
