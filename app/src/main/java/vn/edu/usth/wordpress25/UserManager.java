@@ -9,10 +9,9 @@ import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 public class UserManager {
     private static UserManager instance;
     private String loggedInEmail;
-    private SQLiteDatabase db; // Ajoutez une référence à la base de données
+    private SQLiteDatabase db;
 
     private UserManager() {
-        // Initialisez la base de données ici (ex : dbHelper.getReadableDatabase())
     }
 
     public static UserManager getInstance() {
@@ -30,10 +29,8 @@ public class UserManager {
         return loggedInEmail;
     }
 
-    // Méthode pour récupérer le prénom de l'utilisateur
     @SuppressLint("Range")
     public String getLoggedInFirstname() {
-        // Exécutez une requête SQL pour récupérer le prénom depuis la base de données
         String firstname = null;
 
         if (db != null) {
@@ -49,6 +46,4 @@ public class UserManager {
 
         return firstname;
     }
-
-    // Ajoutez des méthodes similaires pour récupérer d'autres informations de l'utilisateur
 }

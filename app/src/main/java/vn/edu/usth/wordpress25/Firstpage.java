@@ -40,7 +40,6 @@ public class Firstpage extends AppCompatActivity {
     public void goToMainActivity(View view) {
         Fragment connectionFragment = new connection();
 
-        // Ajoutez le fragment à la pile d'activité
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.firstpage, connectionFragment)

@@ -47,19 +47,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Vérifier si les tables existent déjà
         if (!isTableExists(db, TABLE_NAME) && !isTableExists(db, TABLE_NAME2)) {
-            // Créer la table user_table si elle n'existe pas
             db.execSQL("create table " + TABLE_NAME + "(EMAIL STRING PRIMARY KEY, PASSWORD STRING, " +
                     "FIRSTNAME STRING, LASTNAME STRING, DISPLAYNAME STRING, USERNAME STRING,TABFOLLOWS STRING, TABMYSITES STRING)");
 
-            // Créer la table site_table si elle n'existe pas
             db.execSQL("create table " + TABLE_NAME2 + "(URL STRING PRIMARY KEY, NAMESITE STRING, " +
                     "AUTHOR STRING, TABTAGS STRING, TABFOLLOWERS STRING)");
         }
     }
 
-    // Méthode pour vérifier si une table existe déjà dans la base de données
     private boolean isTableExists(SQLiteDatabase db, String tableName) {
         Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{tableName});
         boolean tableExists = cursor.getCount() > 0;
@@ -137,23 +133,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void addUserToFollowers(String siteUrl, String userId) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Vérifier si l'URL du site existe déjà dans la table site_table
         Cursor siteCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME2 + " WHERE " + URL + "=?", new String[]{siteUrl});
         if (siteCursor.getCount() > 0) {
-            // L'URL du site existe, nous pouvons ajouter l'utilisateur à TABFOLLOWERS
-
-            // Tout d'abord, obtenir la liste actuelle des followers pour ce site
             siteCursor.moveToFirst();
             String currentFollowers = siteCursor.getString(4);
 
-            // Ajouter l'ID de l'utilisateur à la liste des followers
             if (currentFollowers == null || currentFollowers.isEmpty()) {
                 currentFollowers = userId;
             } else {
                 currentFollowers += "," + userId;
             }
 
-            // Mettre à jour la liste des followers dans la table site_table
             ContentValues contentValues = new ContentValues();
             contentValues.put(TABFOLLOWERS, currentFollowers);
             db.update(TABLE_NAME2, contentValues, URL + "=?", new String[]{siteUrl});
@@ -164,23 +154,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void addSiteToMySites(String userId, String siteUrl) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Vérifier si l'utilisateur avec userId existe déjà dans la table user_table
         Cursor userCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + "=?", new String[]{userId});
         if (userCursor.getCount() > 0) {
-            // L'utilisateur existe, nous pouvons ajouter siteUrl à TABMYSITES
-
-            // Tout d'abord, obtenir la liste actuelle de TABMYSITES pour cet utilisateur
             userCursor.moveToFirst();
             String currentMySites = userCursor.getString(7);
 
-            // Ajouter siteUrl à la liste de TABMYSITES de l'utilisateur
             if (currentMySites == null || currentMySites.isEmpty()) {
                 currentMySites = siteUrl;
             } else {
                 currentMySites += "," + siteUrl;
             }
 
-            // Mettre à jour la liste de TABMYSITES dans la table user_table
             ContentValues contentValues = new ContentValues();
             contentValues.put(TABMYSITES, currentMySites);
             db.update(TABLE_NAME, contentValues, EMAIL + "=?", new String[]{userId});
@@ -190,18 +174,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public void addSiteToFollows(String userId, String siteUrl) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        // Vérifier si l'utilisateur avec userId existe déjà dans la table user_table
         Cursor userCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + "=?", new String[]{userId});
         if (userCursor.getCount() > 0) {
-            // L'utilisateur existe, nous pouvons ajouter siteUrl à TABFOLLOWS
-
-            // Tout d'abord, obtenir la liste actuelle de TABFOLLOWS pour cet utilisateur
-            userCursor.moveToFirst();
+             userCursor.moveToFirst();
             String currentFollows = userCursor.getString(6);
 
-
-            // Ajouter siteUrl à la liste de TABFOLLOWS de l'utilisateur
             if (currentFollows == null || currentFollows.isEmpty()) {
                 currentFollows = siteUrl;
             } else {
@@ -219,10 +196,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public static String[] stringToArray(String inputString) {
-        // Utilisez la méthode split() pour diviser la chaîne en utilisant des virgules comme séparateurs
         String[] elements = inputString.split(",");
 
-        // Retournez le tableau résultant
         return elements;
     }
 
@@ -241,14 +216,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                // Supposons que la colonne que vous souhaitez extraire soit la première colonne.
-                // Vous pouvez ajuster cela en fonction de votre schéma de base de données.
                 String stringValue = cursor.getString(0);
                 stringList.add(stringValue);
             } while (cursor.moveToNext());
         }
 
-        // Convertir la liste en tableau de chaînes de caractères
         String[] stringArray = stringList.toArray(new String[0]);
 
         return stringArray;
@@ -257,8 +229,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String stringValue = "";
 
         if (cursor != null && cursor.moveToFirst()) {
-            // Supposons que la colonne que vous souhaitez extraire soit la première colonne.
-            // Vous pouvez ajuster cela en fonction de votre schéma de base de données.
             stringValue = cursor.getString(0);
         }
 
@@ -292,7 +262,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME2, "url = ?", new String[] {url});
     }
-
-
-
 }
