@@ -168,27 +168,28 @@ public class NotifFollowsFragment extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String sitename = dbHelper.fetchStringFromCursor(cursorsite);
-
+        if (sitename != null) {
         Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
                 DatabaseHelper.URL + " = ?", new String[]{sitename});
 
 
         String tabfollowers=dbHelper.fetchStringFromCursor(cursor);
-        String[] tabfollowerstab=dbHelper.stringToArray(tabfollowers);
-        // Parcourez la liste des utilisateurs
-        for (String user : tabfollowerstab) {
 
-            UsersFragment userFragment = UsersFragment.newInstance(user); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+            String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
+            // Parcourez la liste des utilisateurs
+            for (String user : tabfollowerstab) {
 
-            // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
-            FragmentManager fragmentManager = getChildFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.conteneurusers, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+                UsersFragment userFragment = UsersFragment.newInstance(user); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
 
-            fragmentTransaction.commit();
+                // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
+                FragmentManager fragmentManager = getChildFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.conteneurusers, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
 
+                fragmentTransaction.commit();
+
+            }
         }
-
         return view;
     }
 

@@ -75,9 +75,9 @@ public class SiteFollowsFragment extends Fragment {
 
 
 
-        Bundle args = getArguments();
+      //  Bundle args = getArguments();
 
-        final String username = args.getString("userName");
+      //  final String username = args.getString("sitename");
 
 
 

@@ -67,6 +67,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return tableExists;
     }
 
+
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -88,6 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(LASTNAME,lastname);
         contentValues.put(DISPLAYNAME,displayname);
         contentValues.put(USERNAME,username);
+
         long result = db.insert(TABLE_NAME,null, contentValues);
         if (result == -1)
             return false;
@@ -168,7 +171,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             // Tout d'abord, obtenir la liste actuelle de TABMYSITES pour cet utilisateur
             userCursor.moveToFirst();
-            String currentMySites = userCursor.getString(6);
+            String currentMySites = userCursor.getString(7);
 
             // Ajouter siteUrl à la liste de TABMYSITES de l'utilisateur
             if (currentMySites == null || currentMySites.isEmpty()) {

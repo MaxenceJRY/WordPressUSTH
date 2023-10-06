@@ -20,11 +20,6 @@ import vn.edu.usth.wordpress25.R;
 import vn.edu.usth.wordpress25.UserManager;
 import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NotifUnreadFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NotifUnreadFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -101,21 +96,21 @@ public class NotifUnreadFragment extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String sitename = dbHelper.fetchStringFromCursor(cursorsite);
+        if (sitename != null) {
+            Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
+                    DatabaseHelper.URL + " = ?", new String[]{sitename});
 
-        Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
-                DatabaseHelper.URL + " = ?", new String[]{sitename});
-
-        String tabfollowers = dbHelper.fetchStringFromCursor(cursor);
-        String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
-        // Parcourez la liste des utilisateurs
-        for (String user : tabfollowerstab) {
-            UsersFragment userFragment = UsersFragment.newInstance(user);
-            FragmentManager fragmentManager = getChildFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.conteneurusers3, userFragment);
-            fragmentTransaction.commit();
+            String tabfollowers = dbHelper.fetchStringFromCursor(cursor);
+            String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
+            // Parcourez la liste des utilisateurs
+            for (String user : tabfollowerstab) {
+                UsersFragment userFragment = UsersFragment.newInstance(user);
+                FragmentManager fragmentManager = getChildFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.conteneurusers3, userFragment);
+                fragmentTransaction.commit();
+            }
         }
-
         return view;
     }
 
@@ -147,4 +142,3 @@ public class NotifUnreadFragment extends Fragment {
         }
     }
 }
-

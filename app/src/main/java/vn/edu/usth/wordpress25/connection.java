@@ -64,32 +64,25 @@ public class connection extends Fragment {
         EditText emailEditText = view.findViewById(R.id.edit_text_email);
         EditText passwordEditText = view.findViewById(R.id.edit_text_password);
 
-        //  ******** Remove the comment and run the code and go to connect, after comment the same block ******
-
-
-        /*
-        dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
+    /*   dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
         dbHelper.insertDataSITE("https://www.usth.com/","usth","augustin@gmail.com");
         dbHelper.addSiteToMySites("augustin@gmail.com","https://www.usth.com/");
+
         dbHelper.insertData("fabien@gmail.com","123","fabien","fabien","fabien","fabien");
+
+        dbHelper.insertData("max@gmail.com","123","maxence","juery","juery78","juery78");
+
         dbHelper.addUserToFollowers("https://www.usth.com/","fabien@gmail.com");
-        */
-
-
-
-
-        /*   dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
-        dbHelper.insertDataSITE("https://www.usth.com/","usth","augustin@gmail.com");
-        dbHelper.addSiteToMySites("augustin@gmail.com","https://www.usth.com/");
-
-        dbHelper.insertData("fabien@gmail.com","123","fabien","fabien","fabien","fabien");
-
-        // dbHelper.insertData("max@gmail.com","123","maxence","juery","juery78","juery78");
-
-        dbHelper.addUserToFollowers("https://www.usth.com/","fabien@gmail.com");*/
-        //dbHelper.addUserToFollowers("https://www.epf.com/","max@gmail.com");
-        //dbHelper.addSiteToFollows("augustin@gmail.com","https://www.epf.com/");
+        dbHelper.addUserToFollowers("https://www.usth.com/","max@gmail.com");
+        dbHelper.addSiteToFollows("augustin@gmail.com","https://www.grab.com/");
+        dbHelper.addSiteToFollows("augustin@gmail.com","https://www.be.com/");
+        dbHelper.addSiteToFollows("augustin@gmail.com","https://www.yahoo.com/");
+        dbHelper.addSiteToFollows("augustin@gmail.com","https://www.google.com/");*/
         //dbHelper.addSiteToFollows("augustin@gmail.com","https://www.blablacar.com/");
+        //dbHelper.insertData("corentin@gmail.com","123","corentin","andre","corentin","corentin");
+        //dbHelper.addSiteToFollows("augustin@gmail.com","https://www.be.com/");
+        //dbHelper.addSiteToFollows("augustin@gmail.com","https://www.yahoo.com/");
+        //dbHelper.addUserToFollowers("https://www.usth.com/","corentin@gmail.com");
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

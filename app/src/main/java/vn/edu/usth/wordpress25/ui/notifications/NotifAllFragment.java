@@ -100,27 +100,30 @@ public class NotifAllFragment extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String sitename = dbHelper.fetchStringFromCursor(cursorsite);
-
+        if (sitename != null) {
         Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
                 DatabaseHelper.URL + " = ?", new String[]{sitename});
 
 
         String tabfollowers=dbHelper.fetchStringFromCursor(cursor);
-        String[] tabfollowerstab=dbHelper.stringToArray(tabfollowers);
-        // Parcourez la liste des utilisateurs
-        for (String user : tabfollowerstab) {
 
-            UsersFragment userFragment = UsersFragment.newInstance(user); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+            String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
 
-            // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
-            FragmentManager fragmentManager = getChildFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.conteneurusers2, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+            // Parcourez la liste des utilisateurs
 
-            fragmentTransaction.commit();
+            for (String user : tabfollowerstab) {
 
+                UsersFragment userFragment = UsersFragment.newInstance(user); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+
+                // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
+                FragmentManager fragmentManager = getChildFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.conteneurusers2, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+
+                fragmentTransaction.commit();
+
+            }
         }
-
         return view;
     }
     private Cursor getUserData(String email) {

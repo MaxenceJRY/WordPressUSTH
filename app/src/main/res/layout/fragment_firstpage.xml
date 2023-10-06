@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:background="#00FFFFFF"
             android:elevation="0dp"
-            android:text="Enter your existing site"
+            android:text="Registration"
             android:textColor="@color/black" />
     </LinearLayout>
 </RelativeLayout>

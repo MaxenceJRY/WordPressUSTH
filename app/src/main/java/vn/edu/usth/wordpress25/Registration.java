@@ -143,7 +143,9 @@ public class Registration extends AppCompatActivity {
                                 buffer.append("Firstname :" + res.getString(2)+"\n");
                                 buffer.append("Lastname :" + res.getString(3)+"\n");
                                 buffer.append("DisplayName :" + res.getString(4)+"\n");
-                                buffer.append("Username :" + res.getString(5)+"\n\n");
+                                buffer.append("Username :" + res.getString(5)+"\n");
+                                buffer.append("tabfol :" + res.getString(6)+"\n");
+                                buffer.append("tabsite :" + res.getString(7)+"\n\n");
                             }
                             showMessage("Data", buffer.toString());
 

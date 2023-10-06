@@ -102,6 +102,9 @@ public class NotifSettings extends Fragment {
 
         switchButton = view.findViewById(R.id.switch1);
         linearLayout1 = view.findViewById(R.id.linearlayoutnotifsett);
+        // Définir le Switch par défaut sur "ON"
+        switchButton.setChecked(true);
+
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -121,31 +124,28 @@ public class NotifSettings extends Fragment {
         }
         removeAllFragments();
 
-
-
         Cursor userDataCursor = getUserData(UserManager.getInstance().getLoggedInEmail());
         String userdata=dbHelper.fetchStringFromCursor(userDataCursor);
         Cursor cursorsite = db.rawQuery("SELECT TABFOLLOWS FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String tabsite = dbHelper.fetchStringFromCursor(cursorsite);
+        if (tabsite != null) {
+            String[] tabfollows = dbHelper.stringToArray(tabsite);
 
-        String[] tabfollows=dbHelper.stringToArray(tabsite);
-        // Parcourez la liste des utilisateurs
-        for (String site : tabfollows) {
+            // Parcourez la liste des utilisateurs
+            for (String site : tabfollows) {
 
-            SiteFollowsFragment siteFollowsFragment = SiteFollowsFragment.newInstance(site); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+                SiteFollowsFragment siteFollowsFragment = SiteFollowsFragment.newInstance(site); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+                // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
+                FragmentManager fragmentManager = getChildFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.container5, siteFollowsFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+                fragmentTransaction.commit();
 
-            // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
-            FragmentManager fragmentManager = getChildFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.container5, siteFollowsFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
-
-            fragmentTransaction.commit();
+            }
 
         }
-
-
 
 
         return view;
