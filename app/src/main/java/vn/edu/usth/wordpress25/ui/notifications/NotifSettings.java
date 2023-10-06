@@ -130,7 +130,7 @@ public class NotifSettings extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String tabsite = dbHelper.fetchStringFromCursor(cursorsite);
-        if (tabsite != null) {
+        if (tabsite != "") {
             String[] tabfollows = dbHelper.stringToArray(tabsite);
 
             // Parcourez la liste des utilisateurs
@@ -147,6 +147,26 @@ public class NotifSettings extends Fragment {
 
         }
 
+        Cursor cursormysite = db.rawQuery("SELECT TABMYSITES FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
+
+        String tabmysites = dbHelper.fetchStringFromCursor(cursormysite);
+        if (tabmysites != "") {
+            String[] tabmysite = dbHelper.stringToArray(tabmysites);
+
+            // Parcourez la liste des utilisateurs
+            for (String sites : tabmysite) {
+
+                MySiteListExempleFragment mySiteListExempleFragment = MySiteListExempleFragment.newInstance(sites); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+                // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
+                FragmentManager fragmentManager = getChildFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.container9, mySiteListExempleFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+                fragmentTransaction.commit();
+
+            }
+
+        }
 
         return view;
 

@@ -168,26 +168,30 @@ public class NotifFollowsFragment extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String sitename = dbHelper.fetchStringFromCursor(cursorsite);
-        if (sitename != null) {
-        Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
-                DatabaseHelper.URL + " = ?", new String[]{sitename});
+        if (sitename != "") {
+            String[] tabmysites = dbHelper.stringToArray(sitename);
+            for (String site : tabmysites) {
+                Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
+                        DatabaseHelper.URL + " = ?", new String[]{site});
 
 
-        String tabfollowers=dbHelper.fetchStringFromCursor(cursor);
+                String tabfollowers = dbHelper.fetchStringFromCursor(cursor);
+                if (tabfollowers != "") {
+                    String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
+                    // Parcourez la liste des utilisateurs
+                    for (String user : tabfollowerstab) {
 
-            String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
-            // Parcourez la liste des utilisateurs
-            for (String user : tabfollowerstab) {
+                        UsersFragment userFragment = UsersFragment.newInstance(user,site); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
 
-                UsersFragment userFragment = UsersFragment.newInstance(user); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+                        // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
+                        FragmentManager fragmentManager = getChildFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.add(R.id.conteneurusers, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
 
-                // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
-                FragmentManager fragmentManager = getChildFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.conteneurusers, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+                        fragmentTransaction.commit();
 
-                fragmentTransaction.commit();
-
+                    }
+                }
             }
         }
         return view;

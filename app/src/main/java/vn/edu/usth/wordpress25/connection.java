@@ -83,6 +83,16 @@ public class connection extends Fragment {
         //dbHelper.addSiteToFollows("augustin@gmail.com","https://www.be.com/");
         //dbHelper.addSiteToFollows("augustin@gmail.com","https://www.yahoo.com/");
         //dbHelper.addUserToFollowers("https://www.usth.com/","corentin@gmail.com");
+        //dbHelper.addSiteToFollows("fabien@gmail.com","https://www.google.com/");
+        //dbHelper.addSiteToMySites("fabien@gmail.com","https://www.tinder.com/");
+        //dbHelper.insertData("fabrice@gmail.com","123","robin","robin","robin5","robin5");
+        //dbHelper.addSiteToFollows("fabrice@gmail.com","https://www.google.com/");
+        // dbHelper.addSiteToMySites("augustin@gmail.com","https://www.airbnb.com/");
+        //dbHelper.addUserToFollowers("https://www.airbnb.com/","fabrice@gmail.com");
+        //dbHelper.addSiteToFollows("fabrice@gmail.com","https://www.airbnb.com/");
+        //dbHelper.insertDataSITE("https://www.airbnb.com/","airbnb","augustin@gmail.com");
+        //dbHelper.addUserToFollowers("https://www.airbnb.com/","fabrice@gmail.com");
+        dbHelper.addSiteToMySites("fabien@gmail.com","https://www.pizz.com/");
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

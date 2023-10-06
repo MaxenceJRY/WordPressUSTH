@@ -100,28 +100,35 @@ public class NotifAllFragment extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String sitename = dbHelper.fetchStringFromCursor(cursorsite);
-        if (sitename != null) {
-        Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
-                DatabaseHelper.URL + " = ?", new String[]{sitename});
+        if (sitename != "") {
+            String[] tabmysites = dbHelper.stringToArray(sitename);
+            for (String site : tabmysites){
 
 
-        String tabfollowers=dbHelper.fetchStringFromCursor(cursor);
 
-            String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
+            Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
+                    DatabaseHelper.URL + " = ?", new String[]{site});
 
-            // Parcourez la liste des utilisateurs
 
-            for (String user : tabfollowerstab) {
+            String tabfollowers = dbHelper.fetchStringFromCursor(cursor);
+            if (tabfollowers != "" && tabfollowers !=null) {
+                String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
 
-                UsersFragment userFragment = UsersFragment.newInstance(user); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+                // Parcourez la liste des utilisateurs
 
-                // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
-                FragmentManager fragmentManager = getChildFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.conteneurusers2, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+                for (String user : tabfollowerstab) {
 
-                fragmentTransaction.commit();
+                    UsersFragment userFragment = UsersFragment.newInstance(user,site); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
 
+                    // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
+                    FragmentManager fragmentManager = getChildFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.add(R.id.conteneurusers2, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+
+                    fragmentTransaction.commit();
+
+                }
+            }
             }
         }
         return view;

@@ -96,19 +96,25 @@ public class NotifUnreadFragment extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String sitename = dbHelper.fetchStringFromCursor(cursorsite);
-        if (sitename != null) {
-            Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
-                    DatabaseHelper.URL + " = ?", new String[]{sitename});
+        if (sitename != "") {
+            String[] tabmysites = dbHelper.stringToArray(sitename);
+            for (String site : tabmysites) {
 
-            String tabfollowers = dbHelper.fetchStringFromCursor(cursor);
-            String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
-            // Parcourez la liste des utilisateurs
-            for (String user : tabfollowerstab) {
-                UsersFragment userFragment = UsersFragment.newInstance(user);
-                FragmentManager fragmentManager = getChildFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.conteneurusers3, userFragment);
-                fragmentTransaction.commit();
+                Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
+                        DatabaseHelper.URL + " = ?", new String[]{sitename});
+
+                String tabfollowers = dbHelper.fetchStringFromCursor(cursor);
+                if (tabfollowers != "") {
+                    String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
+                    // Parcourez la liste des utilisateurs
+                    for (String user : tabfollowerstab) {
+                        UsersFragment userFragment = UsersFragment.newInstance(user, site);
+                        FragmentManager fragmentManager = getChildFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.add(R.id.conteneurusers3, userFragment);
+                        fragmentTransaction.commit();
+                    }
+                }
             }
         }
         return view;
