@@ -14,7 +14,7 @@
         android:id="@+id/username2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="You have a new follower,congrats"
+        android:text="You have a new follower,congratulation"
         android:textSize="30dp"
         android:gravity="center"/>
 
