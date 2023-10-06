@@ -265,4 +265,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stringValue;
     }
 
+    public void deleteSite(String siteUrl, String userEmail) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor userCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + "=?", new String[]{userEmail});
+        if (userCursor.getCount() > 0) {
+
+            userCursor.moveToFirst();
+            String currentMySites = userCursor.getString(7);
+            String[] sitesArray = currentMySites.split(",");
+            List<String> updatedSitesList = new ArrayList<>();
+            for (String site : sitesArray) {
+                if (!site.equals(siteUrl)){
+                    updatedSitesList.add(site);
+                }
+            }
+            String updatedMySites = String.join(",", updatedSitesList);
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(TABMYSITES, updatedMySites);
+            db.update(TABLE_NAME, contentValues, EMAIL + "=?", new String[]{userEmail});
+            deleteDataSite(siteUrl);
+        }
+    }
+
+    public void deleteDataSite (String url) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME2, "url = ?", new String[] {url});
+    }
+
+
+
 }

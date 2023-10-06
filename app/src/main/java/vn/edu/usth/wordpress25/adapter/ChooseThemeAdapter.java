@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import vn.edu.usth.wordpress25.UserManager;
 import vn.edu.usth.wordpress25.databinding.ItemChooseThemeBinding;
 import vn.edu.usth.wordpress25.model.ChooseTopic;
+import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 
 
 public class ChooseThemeAdapter extends RecyclerView.Adapter<ChooseThemeAdapter.ViewHolder> {
@@ -53,7 +55,15 @@ public class ChooseThemeAdapter extends RecyclerView.Adapter<ChooseThemeAdapter.
         holder.itemBinding.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (onClickListener != null) onClickListener.onDeleteItem(datas.get(holder.getLayoutPosition()), holder.getLayoutPosition());
+                if (onClickListener != null){
+                    onClickListener.onDeleteItem(datas.get(holder.getLayoutPosition()), holder.getLayoutPosition());
+                    DatabaseHelper dbHelper = new DatabaseHelper(context);
+                    Log.d("CHECKKK",data.website);
+                    Log.d("CHECKKK",UserManager.getInstance().getLoggedInEmail());
+                    dbHelper.deleteSite(data.website, UserManager.getInstance().getLoggedInEmail());
+
+                }
+
             }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
