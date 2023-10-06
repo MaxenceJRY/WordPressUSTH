@@ -41,13 +41,13 @@
             android:text="Continue with Wordpress.com" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/SignIn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00FFFFFF"
             android:elevation="0dp"
-            android:text="Enter yout existing site"
+            android:text="Enter your existing site"
             android:textColor="@color/black" />
     </LinearLayout>
 </RelativeLayout>
