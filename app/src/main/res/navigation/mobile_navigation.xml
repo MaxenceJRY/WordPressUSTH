@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_navigation_notifications_to_notifSettings"
             app:destination="@id/notifSettings" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_follows_ExempleFragment"
+            app:destination="@id/follows_ExempleFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_me"
@@ -100,17 +103,26 @@
         android:label="fragment_commentsononthersites"
         tools:layout="@layout/fragment_commentsononthersites" />
     <fragment
+        android:id="@+id/follows_ExempleFragment"
+        android:name="vn.edu.usth.wordpress25.ui.notifications.Follows_ExempleFragment"
+        android:label="fragment_follows__exemple"
+        tools:layout="@layout/fragment_follows__exemple" />
+    <fragment
         android:id="@+id/notifAllFragment"
         android:name="vn.edu.usth.wordpress25.ui.notifications.NotifAllFragment"
         android:label="fragment_notif_all"
         tools:layout="@layout/fragment_notif_all" >
         <action
-            android:id="@+id/action_notifAllFragment_to_mail15"
-            app:destination="@id/mail15" />
+            android:id="@+id/action_notifAllFragment_to_follows_ExempleFragment"
+            app:destination="@id/follows_ExempleFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mail15"
-        android:name="vn.edu.usth.wordpress25.ui.notifications.Mail1"
-        android:label="fragment_mail1"
-        tools:layout="@layout/fragment_mail1" />
+        android:id="@+id/notifUnreadFragment"
+        android:name="vn.edu.usth.wordpress25.ui.notifications.NotifUnreadFragment"
+        android:label="fragment_notif_unread"
+        tools:layout="@layout/fragment_notif_unread" >
+        <action
+            android:id="@+id/action_notifUnreadFragment_to_follows_ExempleFragment"
+            app:destination="@id/follows_ExempleFragment" />
+    </fragment>
 </navigation>

@@ -3,6 +3,8 @@ package vn.edu.usth.wordpress25;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,37 +25,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 import vn.edu.usth.wordpress25.ui.MainActivity;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link connection#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class connection extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
+    private DatabaseHelper dbHelper;
     private String mParam1;
     private String mParam2;
 
     public connection() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment connection.
-     */
-    // TODO: Rename and change types and number of parameters
     public static connection newInstance(String param1, String param2) {
         connection fragment = new connection();
         Bundle args = new Bundle();
@@ -62,16 +45,16 @@ public class connection extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelper = new DatabaseHelper(getContext());
+        dbHelper.onCreate(dbHelper.getWritableDatabase());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,77 +63,71 @@ public class connection extends Fragment {
         Button loginButton = view.findViewById(R.id.button_login);
         EditText emailEditText = view.findViewById(R.id.edit_text_email);
         EditText passwordEditText = view.findViewById(R.id.edit_text_password);
+
+        //  ******** Remove the comment and run the code and go to connect, after comment the same block ******
+
+
+        /*
+        dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
+        dbHelper.insertDataSITE("https://www.usth.com/","usth","augustin@gmail.com");
+        dbHelper.addSiteToMySites("augustin@gmail.com","https://www.usth.com/");
+        dbHelper.insertData("fabien@gmail.com","123","fabien","fabien","fabien","fabien");
+        dbHelper.addUserToFollowers("https://www.usth.com/","fabien@gmail.com");
+        */
+
+
+
+
+        /*   dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
+        dbHelper.insertDataSITE("https://www.usth.com/","usth","augustin@gmail.com");
+        dbHelper.addSiteToMySites("augustin@gmail.com","https://www.usth.com/");
+
+        dbHelper.insertData("fabien@gmail.com","123","fabien","fabien","fabien","fabien");
+
+        // dbHelper.insertData("max@gmail.com","123","maxence","juery","juery78","juery78");
+
+        dbHelper.addUserToFollowers("https://www.usth.com/","fabien@gmail.com");*/
+        //dbHelper.addUserToFollowers("https://www.epf.com/","max@gmail.com");
+        //dbHelper.addSiteToFollows("augustin@gmail.com","https://www.epf.com/");
+        //dbHelper.addSiteToFollows("augustin@gmail.com","https://www.blablacar.com/");
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                // Lire le contenu du fichier JSON et vérifier les identifiants
-                try {
-                    String jsonContent = readJsonFile("Account.json");
-                    JSONArray jsonArray = new JSONArray(jsonContent);
+                boolean isAuthenticated = authenticateUser(email, password);
 
-                    boolean isAuthenticated = false;
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String jsonEmail = jsonObject.getString("email");
-                        String jsonPassword = jsonObject.getString("password");
-
-                        if (email.equals(jsonEmail) && password.equals(jsonPassword)) {
-                            isAuthenticated = true;
-
-                            // Stocker toutes les valeurs de l'utilisateur dans les préférences partagées
-                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("loggedInEmail", email);
-                            editor.putString("loggedInPassword", password);
-                            editor.putString("loggedInFirstname", jsonObject.getString("firstname"));
-                            editor.putString("loggedInLastname", jsonObject.getString("lastname"));
-                            editor.putString("loggedInDisplayname", jsonObject.getString("displayname"));
-                            editor.putString("loggedInUsername", jsonObject.getString("username"));
-                            editor.apply();
-
-                            break;
-                        }
-                    }
-
-                    if (isAuthenticated) {
-                        goToMainActivity(view);
-                    } else {
-                        Toast.makeText(getContext(), "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (isAuthenticated) {
+                    UserManager userManager = UserManager.getInstance();
+                    userManager.setLoggedInEmail(email);
+                    goToMainActivity(view);
+                } else {
+                    Toast.makeText(getContext(), "Email or password incorrect", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
         return view;
     }
 
     public void goToMainActivity(View view) {
+
         Context context = getActivity();
         Intent intent = new Intent(context, MainActivity.class);
         startActivity(intent);
     }
 
-    // Méthode pour lire le contenu d'un fichier JSON
-    private String readJsonFile(String filePath) {
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getContext().getAssets().open(filePath)));
-            StringBuilder jsonString = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                jsonString.append(line);
-            }
-            reader.close();
-            return jsonString.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+    private boolean authenticateUser(String email, String password) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                        DatabaseHelper.EMAIL + " = ? AND " + DatabaseHelper.PASSWORD + " = ?",
+                new String[]{email, password});
+
+        boolean isAuthenticated = cursor.moveToFirst();
+
+        cursor.close();
+        db.close();
+
+        return isAuthenticated;
     }
 }

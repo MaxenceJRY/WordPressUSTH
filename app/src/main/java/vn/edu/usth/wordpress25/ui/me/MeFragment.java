@@ -1,8 +1,8 @@
 package vn.edu.usth.wordpress25.ui.me;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +16,21 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import vn.edu.usth.wordpress25.R;
+import vn.edu.usth.wordpress25.UserManager;
 import vn.edu.usth.wordpress25.databinding.FragmentMeBinding;
+import vn.edu.usth.wordpress25.ui.DatabaseHelper;
 
 public class MeFragment extends Fragment {
+
+    private DatabaseHelper dbHelper;
     private FragmentMeBinding binding;
+    String firstname;
+    String disp;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dbHelper = new DatabaseHelper(getContext());
+    }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -74,13 +85,39 @@ public class MeFragment extends Fragment {
             }
         });
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        String loggedInFirstname = sharedPreferences.getString("loggedInFirstname", "");
-        String loggedInDisplayname = sharedPreferences.getString("loggedInDisplayname", "");
-        TextView name = view.findViewById(R.id.Name);
-        TextView surname = view.findViewById(R.id.Surname);
-        surname.setText(loggedInDisplayname);
-        name.setText(loggedInFirstname);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor first = db.rawQuery("SELECT firstname FROM " + DatabaseHelper.TABLE_NAME + " WHERE email = ?",
+                new String[]{UserManager.getInstance().getLoggedInEmail()});
+        Cursor display = db.rawQuery("SELECT displayname FROM " + DatabaseHelper.TABLE_NAME + " WHERE email = ?",
+                new String[]{UserManager.getInstance().getLoggedInEmail()});
+
+        if (first != null && first.moveToFirst()) {
+            firstname = first.getString(0);
+            TextView name = view.findViewById(R.id.Name);
+
+            name.setText(firstname);
+        }
+        if (display != null && display.moveToFirst()) {
+            disp = display.getString(0);
+            TextView surname = view.findViewById(R.id.Surname);
+
+            surname.setText(disp);
+        }
+
+       /* Cursor userDataCursor = getUserData(UserManager.getInstance().getLoggedInEmail());
+
+        if (userDataCursor != null && userDataCursor.moveToFirst()) {
+            String loggedInFirstname = userDataCursor.getString(3);
+            String loggedInDisplayname = userDataCursor.getString(5);
+
+            TextView name = view.findViewById(R.id.Name);
+            TextView surname = view.findViewById(R.id.Surname);
+
+            surname.setText(loggedInDisplayname);
+            name.setText(loggedInFirstname);
+
+            userDataCursor.close();
+        }*/
         return view;
     }
 
@@ -94,4 +131,11 @@ public class MeFragment extends Fragment {
         binding = null;
     }
 
+    private Cursor getUserData(String email) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                DatabaseHelper.EMAIL + " = ?", new String[]{email});
+
+        return cursor;
+    }
 }

@@ -20,15 +20,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Light"
-            android:onClick="checkRadio"
             android:checked="true"/>
 
         <RadioButton
             android:id="@+id/dark_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dark"
-            android:onClick="checkRadio"/>
+            android:text="Dark"/>
     </RadioGroup>
 
 </LinearLayout>
