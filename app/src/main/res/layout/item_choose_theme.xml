@@ -66,6 +66,7 @@
                     android:padding="15dp">
 
                     <TextView
+                        android:textColor="@color/black"
                         android:id="@+id/tvTopic"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -73,6 +74,19 @@
                         android:textSize="15sp"
                         android:textStyle="bold"
                         tools:text="Food" />
+
+                    <TextView
+                        android:id="@+id/tvWeb"
+                        tools:visibility="visible"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|start"
+                        tools:text="google.com.vn"
+                        android:textColor="@color/color6B6B6B5"
+                        android:textSize="13sp"
+                        android:textStyle="normal"
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:layout_width="match_parent"

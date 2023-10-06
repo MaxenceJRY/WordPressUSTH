@@ -195,7 +195,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             // Tout d'abord, obtenir la liste actuelle de TABFOLLOWS pour cet utilisateur
             userCursor.moveToFirst();
-            String currentFollows = userCursor.getString(5);
+            String currentFollows = userCursor.getString(6);
+
 
             // Ajouter siteUrl à la liste de TABFOLLOWS de l'utilisateur
             if (currentFollows == null || currentFollows.isEmpty()) {

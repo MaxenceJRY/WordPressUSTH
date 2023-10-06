@@ -28,6 +28,15 @@
             android:name=".ui.mysite.ChooseThemeActivity"
             android:exported="false"
             android:theme="@style/Theme.WordPress25" />
+        <activity
+            android:name=".ui.Reader.discover.DiscoverTopicActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".ui.Reader.discover.DetailPostActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
             android:name=".ui.mysite.PreviewActivity"
@@ -39,6 +48,10 @@
         <activity
             android:name=".Registration"
             android:exported="false" />
+        <activity
+            android:name=".ui.mysite.ChooseDomainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".ui.me.Account_settings"
             android:exported="false"

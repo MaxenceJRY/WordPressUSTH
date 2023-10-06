@@ -182,7 +182,7 @@ public class HomeFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     @Subscribe
     public void onMessageEvent(MessageEvent event) {
-        if (event.getMsg().contentEquals(MessageEvent.CHOOSED_THEME) || event.getMsg().contentEquals(MessageEvent.DELETED_THEME)) {
+        if (event.getMsg().contentEquals(MessageEvent.CHOOSED_SITE) || event.getMsg().contentEquals(MessageEvent.DELETED_THEME)) {
             if (themes != null) {
                 themes.clear();
                 initData();

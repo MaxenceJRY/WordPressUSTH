@@ -126,7 +126,7 @@ public class NotifFollowsFragment extends Fragment {
         }
 
 
-// Supprimez tous les fragments existants avant d'en ajouter de nouveaux
+        // Supprimez tous les fragments existants avant d'en ajouter de nouveaux
         removeAllFragments();
 
 
@@ -163,7 +163,7 @@ public class NotifFollowsFragment extends Fragment {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor userDataCursor = getUserData(UserManager.getInstance().getLoggedInEmail());
-String userdata=dbHelper.fetchStringFromCursor(userDataCursor);
+        String userdata=dbHelper.fetchStringFromCursor(userDataCursor);
         Cursor cursorsite = db.rawQuery("SELECT TABMYSITES FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
@@ -191,6 +191,8 @@ String userdata=dbHelper.fetchStringFromCursor(userDataCursor);
 
         return view;
     }
+
+
 
     private Cursor getUserData(String email) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
