@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import vn.edu.usth.wordpress25.R;
 import vn.edu.usth.wordpress25.UserManager;
@@ -111,10 +112,13 @@ public class NotifSettings extends Fragment {
                 // Si le Switch est activé (ON), affichez les LinearLayout, sinon cachez-les
                 if (isChecked) {
                     linearLayout1.setVisibility(View.VISIBLE);
+                    Switch SwitchTextView = view.findViewById(R.id.switch1);
+                    SwitchTextView.setText("On");
 
                 } else {
                     linearLayout1.setVisibility(View.GONE);
-
+                    Switch SwitchTextView = view.findViewById(R.id.switch1);
+                    SwitchTextView.setText("Of");
                 }
             }
         });

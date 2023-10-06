@@ -64,7 +64,7 @@ public class connection extends Fragment {
         EditText emailEditText = view.findViewById(R.id.edit_text_email);
         EditText passwordEditText = view.findViewById(R.id.edit_text_password);
 
-    /*   dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
+    /*    dbHelper.insertData("augustin@gmail.com","123","augustin","andre","augustin","augustin");
         dbHelper.insertDataSITE("https://www.usth.com/","usth","augustin@gmail.com");
         dbHelper.addSiteToMySites("augustin@gmail.com","https://www.usth.com/");
 

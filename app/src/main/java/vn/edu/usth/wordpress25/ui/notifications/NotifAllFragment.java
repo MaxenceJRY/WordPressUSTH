@@ -74,10 +74,7 @@ public class NotifAllFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view=inflater.inflate(R.layout.fragment_notif_all,container,false);
-
-
         LinearLayout mail1 = view.findViewById(R.id.conteneurusers2);
 
        mail1.setOnClickListener(new View.OnClickListener() {
@@ -117,8 +114,16 @@ public class NotifAllFragment extends Fragment {
                 // Parcourez la liste des utilisateurs
 
                 for (String user : tabfollowerstab) {
+                    Cursor cursordisplayname = db.rawQuery("SELECT USERNAME FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                            DatabaseHelper.EMAIL + " = ?", new String[]{user});
+                    String displayname = dbHelper.fetchStringFromCursor(cursordisplayname);
 
-                    UsersFragment userFragment = UsersFragment.newInstance(user,site); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+                    Cursor cursorsitename = db.rawQuery("SELECT NAMESITE FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
+                            DatabaseHelper.URL + " = ?", new String[]{site});
+                    String sitename2 = dbHelper.fetchStringFromCursor(cursorsitename);
+
+
+                    UsersFragment userFragment = UsersFragment.newInstance(displayname,sitename2); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
 
                     // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
                     FragmentManager fragmentManager = getChildFragmentManager();

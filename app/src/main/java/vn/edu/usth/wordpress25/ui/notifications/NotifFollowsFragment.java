@@ -121,44 +121,11 @@ public class NotifFollowsFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.follows_ExempleFragment);
             }
         });
+
         if (dbHelper == null) {
             dbHelper = new DatabaseHelper(getContext());
         }
-
-
-        // Supprimez tous les fragments existants avant d'en ajouter de nouveaux
         removeAllFragments();
-
-
-
-
-        //  dbHelper.insertDataSITE("https://www.youtube.com/","Youtube","vlad@gmail.com");
-        // dbHelper.insertDataSITE("https://www.pizza4P.com/","Pizza4P","max@gmail.com");
-        //dbHelper.insertDataSITE("https://www.facebook.com/","Facebook","huy@gmail.com");
-
-
-
-
-
-  /*      Button button = view.findViewById(R.id.buttonreaderf); // Assurez-vous que le bouton a l'ID correct
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Accédez à l'activité parente
-                AppCompatActivity activity = (AppCompatActivity) getActivity();
-
-                // Accédez à la barre de navigation
-                BottomNavigationView bottomNavigationView = activity.findViewById(R.id.nav_view); // Remplacez par l'ID de votre barre de navigation
-
-                // Sélectionnez l'onglet "Dashboard"
-                bottomNavigationView.setSelectedItemId(R.id.navigation_reader);
-            }
-        });
-*/
-        // Utilisez la référence à Site1
-
-
-
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -168,20 +135,33 @@ public class NotifFollowsFragment extends Fragment {
                 DatabaseHelper.EMAIL + " = ?", new String[]{userdata});
 
         String sitename = dbHelper.fetchStringFromCursor(cursorsite);
-        if (sitename != ""&& sitename !=null) {
+        if (sitename != "" && sitename !=null) {
             String[] tabmysites = dbHelper.stringToArray(sitename);
-            for (String site : tabmysites) {
+            for (String site : tabmysites){
+
+
+
                 Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
                         DatabaseHelper.URL + " = ?", new String[]{site});
 
 
                 String tabfollowers = dbHelper.fetchStringFromCursor(cursor);
-                if (tabfollowers != ""&& sitename !=tabfollowers) {
+                if (tabfollowers != "" && tabfollowers !=null) {
                     String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
-                    // Parcourez la liste des utilisateurs
-                    for (String user : tabfollowerstab) {
 
-                        UsersFragment userFragment = UsersFragment.newInstance(user,site); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+                    // Parcourez la liste des utilisateurs
+
+                    for (String user : tabfollowerstab) {
+                        Cursor cursordisplayname = db.rawQuery("SELECT USERNAME FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                                DatabaseHelper.EMAIL + " = ?", new String[]{user});
+                        String displayname = dbHelper.fetchStringFromCursor(cursordisplayname);
+
+                        Cursor cursorsitename = db.rawQuery("SELECT NAMESITE FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
+                                DatabaseHelper.URL + " = ?", new String[]{site});
+                        String sitename2 = dbHelper.fetchStringFromCursor(cursorsitename);
+
+
+                        UsersFragment userFragment = UsersFragment.newInstance(displayname,sitename2); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
 
                         // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
                         FragmentManager fragmentManager = getChildFragmentManager();
@@ -195,6 +175,7 @@ public class NotifFollowsFragment extends Fragment {
             }
         }
         return view;
+
     }
 
 

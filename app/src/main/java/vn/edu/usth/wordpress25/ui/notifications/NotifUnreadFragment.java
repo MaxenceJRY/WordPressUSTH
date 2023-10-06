@@ -100,6 +100,7 @@ public class NotifUnreadFragment extends Fragment {
             String[] tabmysites = dbHelper.stringToArray(sitename);
             for (String site : tabmysites) {
 
+
                 Cursor cursor = db.rawQuery("SELECT TABFOLLOWERS FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
                         DatabaseHelper.URL + " = ?", new String[]{sitename});
 
@@ -108,7 +109,16 @@ public class NotifUnreadFragment extends Fragment {
                     String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
                     // Parcourez la liste des utilisateurs
                     for (String user : tabfollowerstab) {
-                        UsersFragment userFragment = UsersFragment.newInstance(user, site);
+                        Cursor cursordisplayname = db.rawQuery("SELECT USERNAME FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
+                                DatabaseHelper.EMAIL + " = ?", new String[]{user});
+                        String displayname = dbHelper.fetchStringFromCursor(cursordisplayname);
+
+                        Cursor cursorsitename = db.rawQuery("SELECT NAMESITE FROM " + DatabaseHelper.TABLE_NAME2 + " WHERE " +
+                                DatabaseHelper.URL + " = ?", new String[]{site});
+                        String sitename2 = dbHelper.fetchStringFromCursor(cursorsitename);
+
+
+                        UsersFragment userFragment = UsersFragment.newInstance(displayname,sitename2);
                         FragmentManager fragmentManager = getChildFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.add(R.id.conteneurusers3, userFragment);
