@@ -68,13 +68,13 @@ public class NotifCommentsFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Accédez à l'activité parente
+
                 AppCompatActivity activity = (AppCompatActivity) getActivity();
 
-                // Accédez à la barre de navigation
+
                 BottomNavigationView bottomNavigationView = activity.findViewById(R.id.nav_view); // Remplacez par l'ID de votre barre de navigation
 
-                // Sélectionnez l'onglet "Dashboard"
+
                 bottomNavigationView.setSelectedItemId(R.id.navigation_reader);
             }
         });

@@ -60,15 +60,15 @@ public class NotifUnreadFragment extends Fragment {
 
         mail1 = view.findViewById(R.id.conteneurusers3);
 
-        // Lisez l'état du clic dans les préférences partagées
+
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         isMail1Clicked = sharedPreferences.getBoolean("mail1_clicked", false);
 
-        // Si le LinearLayout a été cliqué, masquez-le définitivement
+
         if (isMail1Clicked) {
             mail1.setVisibility(View.GONE);
         } else {
-            // Si le LinearLayout n'a pas encore été cliqué, configurez le clic
+
             mail1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

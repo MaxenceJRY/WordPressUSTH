@@ -111,7 +111,7 @@ public class NotifAllFragment extends Fragment {
             if (tabfollowers != "" && tabfollowers !=null) {
                 String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
 
-                // Parcourez la liste des utilisateurs
+
 
                 for (String user : tabfollowerstab) {
                     Cursor cursordisplayname = db.rawQuery("SELECT USERNAME FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
@@ -123,12 +123,12 @@ public class NotifAllFragment extends Fragment {
                     String sitename2 = dbHelper.fetchStringFromCursor(cursorsitename);
 
 
-                    UsersFragment userFragment = UsersFragment.newInstance(displayname,sitename2); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+                    UsersFragment userFragment = UsersFragment.newInstance(displayname,sitename2);
 
-                    // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
+
                     FragmentManager fragmentManager = getChildFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.add(R.id.conteneurusers2, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+                    fragmentTransaction.add(R.id.conteneurusers2, userFragment);
 
                     fragmentTransaction.commit();
 

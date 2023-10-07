@@ -64,15 +64,15 @@ public class Follows_ExempleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_follows__exemple, container, false);
-        // Référence au TextView
+
         TextView usernameTextView = view.findViewById(R.id.username2);
 
-        // Obtenez le nom de l'utilisateur (remplacez ceci par votre propre logique)
+
         String userName = mParam1;
 
-        // Définissez le texte du TextView avec le nom de l'utilisateur
+
         usernameTextView.setText(userName);
         return inflater.inflate(R.layout.fragment_follows__exemple, container, false);
 
@@ -82,7 +82,7 @@ public class Follows_ExempleFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            // Utilisez NavController pour revenir en arrière
+
             NavHostFragment.findNavController(this).navigateUp();
             return true;
         }

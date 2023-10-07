@@ -65,18 +65,17 @@ public class UsersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        // return inflater.inflate(R.layout.fragment_users, container, false);
+
         View view = inflater.inflate(R.layout.fragment_users, container, false);
 
-        // Référence au TextView
+
         TextView usernameTextView = view.findViewById(R.id.username);
 
-        // Obtenez le nom de l'utilisateur (remplacez ceci par votre propre logique)
+
         String userName = mParam1;
         String site = mParam2;
 
-        // Définissez le texte du TextView avec le nom de l'utilisateur
+
         usernameTextView.setText(userName + " follows "+ site);
 
 

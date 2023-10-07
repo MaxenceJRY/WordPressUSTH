@@ -76,8 +76,7 @@ public class NotifSettings extends Fragment {
         }
         dbHelper = new DatabaseHelper(getContext());
 
-        // Créer la table site_table si elle n'existe pas encore
-       // dbHelper.onCreate(dbHelper.getWritableDatabase());
+
 
     }
 
@@ -103,13 +102,13 @@ public class NotifSettings extends Fragment {
 
         switchButton = view.findViewById(R.id.switch1);
         linearLayout1 = view.findViewById(R.id.linearlayoutnotifsett);
-        // Définir le Switch par défaut sur "ON"
+
         switchButton.setChecked(true);
 
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Si le Switch est activé (ON), affichez les LinearLayout, sinon cachez-les
+
                 if (isChecked) {
                     linearLayout1.setVisibility(View.VISIBLE);
                     Switch SwitchTextView = view.findViewById(R.id.switch1);
@@ -118,7 +117,7 @@ public class NotifSettings extends Fragment {
                 } else {
                     linearLayout1.setVisibility(View.GONE);
                     Switch SwitchTextView = view.findViewById(R.id.switch1);
-                    SwitchTextView.setText("Of");
+                    SwitchTextView.setText("Off");
                 }
             }
         });

@@ -14,7 +14,7 @@ public class NotificationsPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        // Retournez le fragment correspondant à la position
+
         switch (position) {
             case 0:
                 return new NotifAllFragment();
@@ -33,13 +33,13 @@ public class NotificationsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Retournez le nombre total d'onglets
+
         return 5;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        // Retournez le titre de l'onglet en fonction de la position
+
         switch (position) {
             case 0:
                 return "ALL";

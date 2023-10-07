@@ -76,8 +76,7 @@ public class NotifFollowsFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
 
-        // Stockez la référence à Site1 dans le fragment
-        //fragment.site1Reference = site1Reference;
+
 
         return fragment;
 
@@ -89,23 +88,14 @@ public class NotifFollowsFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            // Créer une instance de la classe DatabaseHelper
+
             dbHelper = new DatabaseHelper(getContext());
 
-            // Créer la table site_table si elle n'existe pas encore
+
             dbHelper.onCreate(dbHelper.getWritableDatabase());
 
 
-        /*    dbHelper.insertData("mathis@gmail.com","123","mathis","andre","mat78","mat78");
-            dbHelper.insertDataSITE("https://www.epf.com/","epf","mathis@gmail.com");
-            dbHelper.addSiteToMySites("mathis@gmail.com","https://www.epf.com/");
 
-            dbHelper.insertData("benoit@gmail.com","123","benoit","benoit","benoit","benoit");
-
-            // dbHelper.insertData("max@gmail.com","123","maxence","juery","juery78","juery78");
-
-            dbHelper.addUserToFollowers("https://www.epf.com/","benoit@gmail.com");
-            dbHelper.addUserToFollowers("https://www.epf.com/","max@gmail.com");*/
         }
     }
 
@@ -149,7 +139,7 @@ public class NotifFollowsFragment extends Fragment {
                 if (tabfollowers != "" && tabfollowers !=null) {
                     String[] tabfollowerstab = dbHelper.stringToArray(tabfollowers);
 
-                    // Parcourez la liste des utilisateurs
+
 
                     for (String user : tabfollowerstab) {
                         Cursor cursordisplayname = db.rawQuery("SELECT USERNAME FROM " + DatabaseHelper.TABLE_NAME + " WHERE " +
@@ -161,12 +151,11 @@ public class NotifFollowsFragment extends Fragment {
                         String sitename2 = dbHelper.fetchStringFromCursor(cursorsitename);
 
 
-                        UsersFragment userFragment = UsersFragment.newInstance(displayname,sitename2); // Vous devrez créer un UserFragment pour afficher le nom de l'utilisateur
+                        UsersFragment userFragment = UsersFragment.newInstance(displayname,sitename2);
 
-                        // Utilisez un FragmentManager pour ajouter le fragment à l'interface utilisateur
                         FragmentManager fragmentManager = getChildFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.add(R.id.conteneurusers, userFragment); // R.id.fragment_container est l'ID de la vue où vous voulez ajouter le fragment
+                        fragmentTransaction.add(R.id.conteneurusers, userFragment);
 
                         fragmentTransaction.commit();
 

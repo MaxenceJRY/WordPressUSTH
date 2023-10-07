@@ -61,23 +61,21 @@ public class SiteFollowsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_site_follows, container, false);
 
-        // Référence au TextView
+
         TextView sitenameTextView = view.findViewById(R.id.sitename3);
 
-        // Obtenez le nom de l'utilisateur (remplacez ceci par votre propre logique)
+
         String sitename = mParam1;
 
-        // Définissez le texte du TextView avec le nom de l'utilisateur
+
         sitenameTextView.setText(sitename);
 
 
 
-      //  Bundle args = getArguments();
 
-      //  final String username = args.getString("sitename");
 
 
 
