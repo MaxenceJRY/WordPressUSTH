@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Name" />
+                android:text="JaZzArt en València" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -55,14 +55,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="24dp"
                     android:layout_weight="1"
-                    android:text="site.wordpress.com" />
+                    android:text="willowdot21.wordpress.com" />
 
                 <TextView
                     android:id="@+id/textView36"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Date" />
+                    android:text="Date:7/10/2023" />
 
             </LinearLayout>
 
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/meat" />
+            android:src="@drawable/travel" />
 
     </androidx.cardview.widget.CardView>
 
@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        android:text="Title of the image"
+        android:text="Wordless Wednesday. Up, up and away."
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -104,7 +104,10 @@
         android:layout_marginRight="24dp"
         android:ellipsize="end"
         android:maxLines="3"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.s"
+        android:text="“Canada is not the party. It’s the apartment above the party.”
+― Craig Ferguson
+
+From Sea to Sea is a phrase taken from the Canadian national anthem and is often used to describe the vastness of Canada’s geography and the diversity of its people. Margaret Atwood says every Canadian has a complicated relationship with the United States, whereas Americans think of Canada as the place where the weather comes from."
         android:textSize="16dp" />
 
     <LinearLayout
@@ -120,12 +123,19 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-
-            <ImageButton
-                android:id="@+id/save_button"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:src="@drawable/save_white" />
+            <CheckBox
+                android:id="@+id/btn_save"
+                android:layout_width="52dp"
+                android:layout_height="37dp"
+                android:layout_gravity="center"
+                android:background="@drawable/baseline_bookmark_24"
+                android:button="@null"
+                android:checked="false"
+                android:paddingLeft="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -172,13 +182,20 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageView9"
+            <CheckBox
+                android:id="@+id/btn_like"
                 android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_height="48dp"
                 android:layout_weight="1"
+                android:background="@drawable/baseline_star"
+                android:button="@null"
+                android:checked="false"
+                android:padding="10dp"
                 android:paddingLeft="15dp"
-                android:src="@drawable/star" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView39"

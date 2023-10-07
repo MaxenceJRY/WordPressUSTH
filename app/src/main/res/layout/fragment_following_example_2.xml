@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Name" />
+                android:text="TsalagiDragon" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -55,14 +55,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="24dp"
                     android:layout_weight="1"
-                    android:text="site.wordpress.com" />
+                    android:text="tsalagidragon.wordpress.com" />
 
                 <TextView
                     android:id="@+id/textView36"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Date" />
+                    android:text="Date:7/10/2023" />
 
             </LinearLayout>
 
@@ -80,9 +80,9 @@
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="280dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_art_2" />
+            android:src="@drawable/movies" />
 
     </androidx.cardview.widget.CardView>
 
@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        android:text="Title of the image"
+        android:text="91 Days of Halloween Movie-thon: Day 66"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -104,7 +104,13 @@
         android:layout_marginRight="24dp"
         android:ellipsize="end"
         android:maxLines="3"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.s"
+        android:text="A salvage crew find a passenger ship from 1962 but discover they might not be the only ones on board.
+
+Karl Urban, Gabriel Byrne, Julianna Margulies, Emily Browning, and many others are in this spooky film. I watched it not long after it had been released on DVD. It has been a favorite of mine for a long time.
+
+It’s a good ghost story set on a ship.
+
+It’s available to watch on Max."
         android:textSize="16dp" />
 
     <LinearLayout
@@ -120,11 +126,19 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:src="@drawable/save_white" />
+            <CheckBox
+                android:id="@+id/btn_save"
+                android:layout_width="52dp"
+                android:layout_height="37dp"
+                android:layout_gravity="center"
+                android:background="@drawable/baseline_bookmark_24"
+                android:button="@null"
+                android:checked="false"
+                android:paddingLeft="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -171,13 +185,20 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageView9"
+            <CheckBox
+                android:id="@+id/btn_like"
                 android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_height="48dp"
                 android:layout_weight="1"
+                android:background="@drawable/baseline_star"
+                android:button="@null"
+                android:checked="false"
+                android:padding="10dp"
                 android:paddingLeft="15dp"
-                android:src="@drawable/star" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView39"

@@ -125,8 +125,8 @@
 
             <CheckBox
                 android:id="@+id/btn_save"
-                android:layout_width="90dp"
-                android:layout_height="34dp"
+                android:layout_width="52dp"
+                android:layout_height="37dp"
                 android:layout_gravity="center"
                 android:background="@drawable/baseline_bookmark_24"
                 android:button="@null"
@@ -186,24 +186,26 @@
             <CheckBox
                 android:id="@+id/btn_like"
                 android:layout_width="24dp"
-                android:layout_height="28dp"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:paddingLeft="15dp"
+                android:background="@drawable/baseline_star"
                 android:button="@null"
-                android:background="@drawable/baseline_favorite_24"
                 android:checked="false"
+                android:padding="10dp"
+                android:paddingLeft="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
-                android:textColor="@color/color6B6B6B5"
                 android:id="@+id/textView39"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="126" />
+                android:text="126"
+                android:textColor="@color/color6B6B6B5" />
         </LinearLayout>
     </LinearLayout>
     <View
